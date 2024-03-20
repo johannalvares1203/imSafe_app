@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PanicButton">
+
+    <!-- Material Design Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#004AAD">
+
+        <!-- Toolbar content -->
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <!-- TextView for displaying information below the Toolbar -->
+    <TextView
+        android:id="@+id/locationInfoTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="This is your current location. Accuracy: 15 meters"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_below="@id/toolbar"/>
+
+    <!-- MapFragment -->
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/locationInfoTextView"
+        android:layout_above="@+id/fabNavigate"/>
+
+    <!-- FloatingActionButton for navigating to another activity -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabNavigate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/baseline_arrow_forward_ios_24"
+        android:contentDescription="Navigate"
+        android:backgroundTint="#004AAD"
+        android:elevation="6dp"
+        app:rippleColor="@color/white"
+        app:srcCompat="@drawable/baseline_arrow_forward_ios_24"
+        android:onClick="navigateToAnotherActivity"/>
+
+</RelativeLayout>

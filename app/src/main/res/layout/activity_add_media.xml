@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".AddMedia">
+
+    <TextView
+        android:id="@+id/tvRecordTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Record Incident"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Audio Recording Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRecordAudio"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Record Audio"
+        android:icon="@drawable/baseline_mic_24"
+        android:layout_below="@id/tvRecordTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:onClick="startAudioRecording"/>
+
+    <!-- Video Recording Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRecordVideo"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Record Video"
+        android:icon="@drawable/baseline_mic_24"
+        android:layout_below="@id/btnRecordAudio"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:onClick="startVideoRecording"/>
+
+    <!-- Photo Capture Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCapturePhoto"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Capture Photo"
+        android:icon="@drawable/baseline_mic_24"
+        android:layout_below="@id/btnRecordVideo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:onClick="capturePhoto"/>
+
+    <!-- other views -->
+    <ImageView
+        android:id="@+id/capturedImageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/btnCapturePhoto"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:visibility="gone"
+        android:scaleType="fitCenter"/>
+    <!-- other views -->
+
+    <!-- Submit Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSubmit"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:icon="@drawable/baseline_mic_24"
+        android:layout_below="@id/capturedImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:onClick="submitIncident"/>
+
+</RelativeLayout>

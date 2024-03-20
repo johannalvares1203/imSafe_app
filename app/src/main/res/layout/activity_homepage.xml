@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Homepage">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:background="#004AAD"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-48dp"
+        tools:layout_editor_absoluteY="-11dp">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="imSAFE"
+            android:textColor="@android:color/white"
+            android:textSize="38sp"
+            android:textStyle="bold"/>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="50dp"
+            android:onClick="showPopupMenu">
+
+            <ImageView
+                android:id="@+id/profileIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:onClick="showPopupMenu"
+                android:background="@drawable/circular_background" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <!-- Center button -->
+
+
+    <!-- Bottom Navigation View -->
+
+    <ImageView
+        android:id="@+id/backgroundImageone"
+        android:layout_width="262dp"
+        android:layout_height="246dp"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/threebuttons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.390" />
+
+    <!-- ImageButton 1 -->
+
+
+    <!-- ImageButton 2 -->
+
+    <!-- ImageButton 3 -->
+
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="500dp"
+        android:layout_height="650dp"
+        android:layout_centerVertical="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ambulance"
+        tools:layout_editor_absoluteX="-40dp"
+        tools:layout_editor_absoluteY="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintVertical_bias="0.60"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"/>
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="500dp"
+        android:layout_height="650dp"
+        android:layout_centerVertical="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/police"
+        tools:layout_editor_absoluteX="-40dp"
+        tools:layout_editor_absoluteY="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintVertical_bias="0.60"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"/>
+
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="500dp"
+        android:layout_height="650dp"
+        android:layout_centerVertical="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/fire"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.60" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:labelVisibilityMode="labeled"
+        android:background="#8DB0FF"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/reportinc"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/baseline_report_24"
+        android:padding="8dp"
+        android:text="Report Incident"
+        android:textSize="18sp"
+        app:backgroundTint="@color/red"
+        app:cornerRadius="15dp"
+        app:iconTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.657"
+        app:rippleColor="@android:color/white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/chat"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/baseline_chat_24"
+        android:padding="8dp"
+        app:cornerRadius="15dp"
+        android:text="Chat with Counsellor"
+        android:textSize="18sp"
+        app:backgroundTint="#3C74F1"
+        app:iconTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.757"
+        app:rippleColor="@android:color/white" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,38 @@
+<resources>
+
+    <style name="ShapeAppearanceOverlay.MaterialImageView.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="Widget.Theme.NeighbourhoodWatch.MyView" parent="">
+        <item name="android:background">@color/gray_400</item>
+        <item name="color">@color/light_blue_400</item>
+    </style>
+
+    <style name="MyTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxStrokeColor">#004AAD</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Other style attributes -->
+        <item name="navigationViewStyle">@style/NavigationViewStyle</item>
+    </style>
+
+    <style name="NavigationViewStyle" parent="Widget.Design.NavigationView">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="CircularImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="RoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">40dp</item> <!-- Adjust radius as needed -->
+    </style>
+
+
+
+</resources>

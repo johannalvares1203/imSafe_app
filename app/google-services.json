@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1017782215736",
+    "project_id": "imsafe-app",
+    "storage_bucket": "imsafe-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017782215736:android:0c3a846202d8892dabb2cd",
+        "android_client_info": {
+          "package_name": "com.example.imsafeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTP_JhyV4KnFvkUX_K3o6Tv7NJI31ejpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

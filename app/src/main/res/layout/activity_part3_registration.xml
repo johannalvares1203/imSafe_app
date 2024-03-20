@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Part3_Registration">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/registrationTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Your Account"
+                android:textSize="36sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/demographicInfoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Extra Information"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:padding="16dp"
+                android:gravity="center"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/part"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Part 3 of 3"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:padding="16dp"
+                android:gravity="center"
+                android:textColor="@color/black"/>
+
+            <!-- Linear Layout for Emergency Contact 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputEmergencyContact1Name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:boxStrokeColor="#004AAD"
+                    app:boxStrokeWidth="2dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:hintTextColor="@color/black"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextEmergencyContact1Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Emergency Contact 1 Name:"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Material TextInputLayout for Emergency Contact 1 Number -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputEmergencyContact1Number"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:boxStrokeColor="#004AAD"
+                    app:boxStrokeWidth="2dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:hintTextColor="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextEmergencyContact1Number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Emergency Contact 1 Number:"
+                        android:inputType="phone"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Linear Layout for Emergency Contact 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                >
+
+                <!-- Material TextInputLayout for Emergency Contact 2 Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputEmergencyContact2Name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:boxStrokeColor="#004AAD"
+                    app:boxStrokeWidth="2dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:hintTextColor="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextEmergencyContact2Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Emergency Contact 2 Name:"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- EditText for Emergency Contact 2 Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputEmergencyContact2Number"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:boxStrokeColor="#004AAD"
+                    app:boxStrokeWidth="2dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:hintTextColor="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextEmergencyContact2Number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Emergency Contact 2 Number:"
+                        android:inputType="phone"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+
+            <!-- Checkbox to make Blood Group optional -->
+            <CheckBox
+                android:id="@+id/includeBloodGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/socialicons"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:text="Include Blood Group"
+                android:textColor="#004AAD"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/BloodGroupLayout"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/socialicons"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:hint="Blood Group:"
+                app:boxStrokeColor="#000000"
+                app:boxStrokeWidth="2dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/BloodGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#808080"
+                    android:textColor="#000000"
+                    android:padding="8dp"
+                    android:enabled="true"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <!-- Material Button for Choosing File -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/chooseFileBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose File"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:onClick="onChooseFileClick"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#004AAD"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+            <TextView
+                android:id="@+id/attachmentInfoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Note: Attach any Government of India (GoI) issued IDs. They will be verified."
+                android:textColor="#FF0000"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="4dp"
+                android:background="@drawable/red_border_background"
+                android:drawableStart="@drawable/baseline_info_24"
+                android:drawablePadding="8dp"/>
+
+            <!-- Material ImageView for Selected Image -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/selectedImageView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialImageView.Rounded"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="I accept the "
+                    android:layout_gravity="center_vertical"
+                    android:required="true"/>
+
+                <TextView
+                    android:id="@+id/termsAndConditionsLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="terms and conditions"
+                    android:textColor="@color/blue"
+                    android:clickable="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+
+
+
+            <Button
+                android:id="@+id/buttonRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:backgroundTint="#004AAD"
+                android:layout_marginTop="16dp"
+                android:required="true" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

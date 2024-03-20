@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- rounded_background.xml -->
+<!-- rounded_image_with_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Circular shape (background) -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@android:color/white" /> <!-- Change color if needed -->
+        </shape>
+    </item>
+
+    <!-- Image on top of the circular shape -->
+    <item
+        android:drawable="@drawable/photograph__johann"
+        />
+</layer-list>
