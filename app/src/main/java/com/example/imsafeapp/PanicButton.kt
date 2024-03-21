@@ -19,6 +19,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.telephony.SmsManager
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -37,7 +39,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.squareup.picasso.Picasso
 
 
 class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener  {
@@ -51,8 +55,39 @@ class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_panic_button)
 
+
+        // for bottom menu
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.home -> {
+                    //Lets the user go back to homepage
+                    startActivity(Intent(this, Homepage::class.java))
+                    finish()
+                    true
+                }
+                R.id.aboutus -> {
+                    val intent = Intent(this, AboutUs::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                R.id.tips -> {
+                    // Handle Sub Option 1 click
+                    true
+                }
+                R.id.community -> {
+                    // Handle Sub Option 1 click
+                    true
+                }
+                else -> false
+            }
+        }
+
         // Find the MaterialToolbar by its ID
         val toolbar: MaterialToolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         // Set the title for the toolbar
         val locationInfoTextView: TextView = findViewById(R.id.locationInfoTextView)
@@ -67,6 +102,20 @@ class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         fabNavigate.setOnClickListener {
             // Handle the click event for navigating to another activity
             navigateToAnotherActivity()
+        }
+
+
+
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+        //Replaces image with one associated with Google Account
+        val profileImageView: ImageView = findViewById(R.id.profileIcon)
+
+        if (account != null) {
+            // Load the profile photo using Picasso library (or any other image loading library)
+            Picasso.get().load(account.photoUrl).into(profileImageView)
+        } else {
+            // If the user is not signed in with Google, you can set a default image or hide the ImageView
+            profileImageView.setImageResource(R.drawable.baseline_add_photo_alternate_24)
         }
     }
 

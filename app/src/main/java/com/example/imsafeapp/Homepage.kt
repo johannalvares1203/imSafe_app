@@ -62,7 +62,9 @@ class Homepage : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.home -> {
-                    // Handle Option 1 click
+                    //Lets the user go back to homepage
+                        startActivity(Intent(this, Homepage::class.java))
+                        finish()
                     true
                 }
                 R.id.aboutus -> {

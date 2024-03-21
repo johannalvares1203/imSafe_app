@@ -5,61 +5,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    tools:context=".AboutUs">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:background="#004AAD"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-48dp"
+        tools:layout_editor_absoluteY="-11dp">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="imSAFE"
+            android:textColor="@android:color/white"
+            android:textSize="38sp"
+            android:textStyle="bold" />
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:onClick="showPopupMenu"
+            app:cardCornerRadius="50dp">
+
+            <ImageView
+                android:id="@+id/profileIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/circular_background"
+                android:onClick="showPopupMenu"
+                android:scaleType="centerCrop" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigationView"
+        android:layout_below="@id/toolbar">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:context=".Profile_Settings">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="200px"
-                android:background="#004AAD"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="-48dp"
-                tools:layout_editor_absoluteY="-11dp">
-
-                <TextView
-                    android:id="@+id/titleTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:text="imSAFE"
-                    android:textColor="@android:color/white"
-                    android:textSize="38sp"
-                    android:textStyle="bold" />
-
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:onClick="showPopupMenu"
-                    app:cardCornerRadius="50dp">
-
-                    <ImageView
-                        android:id="@+id/profileIcon"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/circular_background"
-                        android:onClick="showPopupMenu"
-                        android:scaleType="centerCrop" />
-
-
-                </androidx.cardview.widget.CardView>
-
-
-            </androidx.appcompat.widget.Toolbar>
+            android:orientation="vertical">
 
 
             <RelativeLayout
@@ -203,7 +207,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/one"
+                            android:src="@drawable/melissa"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
 
@@ -246,7 +250,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/one"
+                            android:src="@drawable/lisa"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                         <TextView
@@ -282,7 +286,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/one"
+                            android:src="@drawable/manuja"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                         <TextView
@@ -317,7 +321,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/one"
+                            android:src="@drawable/omkar"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
 
@@ -360,7 +364,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/one"
+                            android:src="@drawable/laxman"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                         <TextView
@@ -397,7 +401,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/one"
+                            android:src="@drawable/whitney"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                         <TextView
