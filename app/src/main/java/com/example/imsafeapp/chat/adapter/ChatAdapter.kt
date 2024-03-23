@@ -1,20 +1,19 @@
-package com.example.imsafeapp
+package com.example.imsafeapp.chat.adapter
 
 import android.content.Context
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.URLSpan
-import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.imsafeapp.chat.model.Chat
 import com.example.imsafeapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import de.hdodenhof.circleimageview.CircleImageView
 
 class ChatAdapter(private val context: Context, private val chatList: ArrayList<Chat>) :
     RecyclerView.Adapter<ChatAdapter.ViewHolder>() {

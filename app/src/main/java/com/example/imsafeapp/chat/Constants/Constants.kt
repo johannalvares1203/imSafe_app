@@ -1,4 +1,4 @@
-package com.example.imsafeapp
+package com.example.imsafeapp.chat.Constants
 
 class Constants {
     companion object {

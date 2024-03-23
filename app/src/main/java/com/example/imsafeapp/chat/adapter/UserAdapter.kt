@@ -1,4 +1,4 @@
-package com.example.imsafeapp
+package com.example.imsafeapp.chat.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.imsafeapp.R
+import com.example.imsafeapp.chat.model.User
+import com.example.imsafeapp.chat.activity.ChatActivity
 import de.hdodenhof.circleimageview.CircleImageView
 
 class UserAdapter(private val context: Context, private val userList: ArrayList<User>) :

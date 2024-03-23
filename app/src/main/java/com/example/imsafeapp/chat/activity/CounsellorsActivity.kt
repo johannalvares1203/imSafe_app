@@ -1,9 +1,10 @@
-package com.example.imsafeapp
+package com.example.imsafeapp.chat.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.example.imsafeapp.chat.adapter.MyViewPagerAdapter
 import com.example.imsafeapp.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener

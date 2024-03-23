@@ -1,7 +1,8 @@
-package com.example.imsafeapp
+package com.example.imsafeapp.chat.`interface`
 
-import com.example.imsafeapp.Constants.Companion.CONTENT_TYPE
-import com.example.imsafeapp.Constants.Companion.SERVER_KEY
+import com.example.imsafeapp.chat.model.PushNotification
+import com.example.imsafeapp.chat.Constants.Constants.Companion.CONTENT_TYPE
+import com.example.imsafeapp.chat.Constants.Constants.Companion.SERVER_KEY
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body

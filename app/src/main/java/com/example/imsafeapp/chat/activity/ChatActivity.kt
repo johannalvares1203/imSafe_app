@@ -1,4 +1,4 @@
-package com.example.imsafeapp
+package com.example.imsafeapp.chat.activity
 
 import android.content.Intent
 import android.net.Uri
@@ -15,6 +15,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.imsafeapp.chat.model.Chat
+import com.example.imsafeapp.chat.adapter.ChatAdapter
+import com.example.imsafeapp.chat.model.NotificationData
+import com.example.imsafeapp.chat.model.PushNotification
+import com.example.imsafeapp.R
+import com.example.imsafeapp.chat.RetrofitInstance
+import com.example.imsafeapp.chat.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*

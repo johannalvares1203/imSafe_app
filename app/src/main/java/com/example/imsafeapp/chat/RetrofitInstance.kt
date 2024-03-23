@@ -1,6 +1,8 @@
-package com.example.imsafeapp
+package com.example.imsafeapp.chat
 
 
+import com.example.imsafeapp.chat.Constants.Constants
+import com.example.imsafeapp.chat.`interface`.NotificationApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -1,4 +1,4 @@
-package com.example.imsafeapp
+package com.example.imsafeapp.chat.model
 
 data class User(
     var userId: String = "",

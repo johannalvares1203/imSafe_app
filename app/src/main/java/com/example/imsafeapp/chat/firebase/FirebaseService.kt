@@ -1,4 +1,4 @@
-package com.example.imsafeapp
+package com.example.imsafeapp.chat.firebase
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,6 +12,8 @@ import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import com.example.imsafeapp.R
+import com.example.imsafeapp.chat.activity.UsersActivity
 
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage

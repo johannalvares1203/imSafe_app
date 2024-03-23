@@ -60,14 +60,14 @@
             android:exported="false" />
 
         <activity
-            android:name=".CounsellorsActivity"
+            android:name=".chat.activity.CounsellorsActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
+            android:name=".chat.activity.ChatActivity"
             android:exported="false" />
 
         <service
-            android:name=".FirebaseService"
+            android:name=".chat.firebase.FirebaseService"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
@@ -77,7 +77,7 @@
         </service>
 
         <activity
-            android:name=".UsersActivity"
+            android:name=".chat.activity.UsersActivity"
             android:exported="false" />
 
         <meta-data

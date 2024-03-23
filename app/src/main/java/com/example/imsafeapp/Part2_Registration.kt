@@ -91,6 +91,7 @@ class Part2_Registration : AppCompatActivity() {
 
         //Verifications for EmailId & Password
         continue_2.setOnClickListener {
+            Log.d("QWE", "2nd button clicked")
             registerUser(PhoneNumber.text.toString(), email.text.toString(), password.text.toString())
             saveDataToFirestore()
 
@@ -155,6 +156,7 @@ class Part2_Registration : AppCompatActivity() {
     }
 
     private fun registerUser(userName: String, email: String, password: String) {
+        Log.d("QWE", "inside registerUser()")
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) {
                 if (it.isSuccessful) {
