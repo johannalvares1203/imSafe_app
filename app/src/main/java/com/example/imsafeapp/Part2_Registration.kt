@@ -17,16 +17,16 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
@@ -91,13 +91,19 @@ class Part2_Registration : AppCompatActivity() {
 
         //Verifications for EmailId & Password
         continue_2.setOnClickListener {
-            Log.d("QWE", "2nd button clicked")
-            registerUser(PhoneNumber.text.toString(), email.text.toString(), password.text.toString())
             saveDataToFirestore()
 
-            val intent = Intent(this, Part3_Registration::class.java)
+            Log.d("QWE", "2nd button clicked")
+            val firstname = intent.getStringExtra("firstname")
+            val lastname = intent.getStringExtra("lastname")
+            val cUserName="$firstname $lastname"
+            registerUser(cUserName, email.text.toString(), password.text.toString())
+
+
+            /*val intent = Intent(this, Part3_Registration::class.java)
             startActivity(intent)
-            finish()
+            finish()*/
+
 //            vibrator.vibrate(10000)
 //            val email = email.text.toString().trim()
 //            val password = password.text.toString().trim()
@@ -163,21 +169,35 @@ class Part2_Registration : AppCompatActivity() {
                     val user: FirebaseUser? = auth.currentUser
                     val userId: String = user!!.uid
 
+                    val firstname = intent.getStringExtra("firstname")
+                    val lastname = intent.getStringExtra("lastname")
+                    val gender = intent.getStringExtra("gender")
+                    val age = intent.getStringExtra("age")
+                    val selectedConstituency = intent.getStringExtra("selectedConstituency")
+                    val address = intent.getStringExtra("address")
+
                     databaseReference =
                         FirebaseDatabase.getInstance().getReference("Users").child(userId)
 
                     val hashMap: HashMap<String, String> = HashMap()
                     hashMap.put("userId", userId)
-                    hashMap.put("userName", userName)
                     hashMap.put("profileImage", "")
+
+                    hashMap.put("userName", userName)
+                    hashMap.put("firstname", firstname!!)
+                    hashMap.put("lastname", lastname!!)
+                    hashMap.put("gender", gender!!)
+                    hashMap.put("age", age!!)
+                    hashMap.put("selectedConstituency", selectedConstituency!!)
+                    hashMap.put("address", address!!)
+
+                    hashMap.put("email", email)
+                    hashMap.put("password", password)
+                    //val phoneNumber: EditText = findViewById(R.id.phoneNumber)
+                    hashMap.put("PhoneNumber", findViewById<EditText>(R.id.phoneNumber).text.toString())
 
                     databaseReference.setValue(hashMap).addOnCompleteListener(this) {
                         if (it.isSuccessful) {
-                            //open home activity
-                            /*etName.setText("")
-                            etEmail.setText("")
-                            etPassword.setText("")
-                            etConfirmPassword.setText("")*/
                             val intent = Intent(
                                 this@Part2_Registration,
                                 Part3_Registration::class.java
@@ -189,8 +209,6 @@ class Part2_Registration : AppCompatActivity() {
                 }
             }
     }
-
-
 
     private fun saveDataToFirestore() {
         // Collect registration data from Part 1
@@ -222,8 +240,6 @@ class Part2_Registration : AppCompatActivity() {
             }
     }
 
-
-
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
@@ -240,7 +256,6 @@ class Part2_Registration : AppCompatActivity() {
                 }
             }
     }
-
 
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 

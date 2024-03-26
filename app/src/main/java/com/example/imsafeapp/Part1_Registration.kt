@@ -125,7 +125,23 @@ class Part1_Registration : AppCompatActivity() {
         continue_1.setOnClickListener {
             saveDataToFirestore()
 
+
+            val firstname = findViewById<EditText>(R.id.editTextFirstName).text.toString()
+            val lastname = findViewById<EditText>(R.id.editTextLastName).text.toString()
+            val gender = findViewById<EditText>(R.id.editTextGender).text.toString()
+            val age = findViewById<EditText>(R.id.editTextAge).text.toString()
+            // birth date?????
+            val selectedConstituency = findViewById<Spinner>(R.id.constituencySpinner).selectedItem.toString()
+            val address = findViewById<EditText>(R.id.editTextAddresss).text.toString()
+
             val intent = Intent(this, Part2_Registration::class.java)
+            intent.putExtra("firstname", firstname)
+            intent.putExtra("lastname", lastname)
+            intent.putExtra("gender", gender)
+            intent.putExtra("age", age)
+            intent.putExtra("selectedConstituency", selectedConstituency)
+            intent.putExtra("address", address)
+
             startActivity(intent)
             finish()
         }

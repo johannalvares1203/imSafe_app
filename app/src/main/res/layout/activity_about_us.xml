@@ -207,7 +207,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/melissa"
+                            android:src="@drawable/edited_johann"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
 
@@ -250,7 +250,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/lisa"
+                            android:src="@drawable/edited_johann"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                         <TextView
@@ -286,7 +286,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/manuja"
+                            android:src="@drawable/edited_johann"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                         <TextView
@@ -321,7 +321,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/omkar"
+                            android:src="@drawable/edited_johann"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
 
@@ -364,7 +364,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/laxman"
+                            android:src="@drawable/edited_johann"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                         <TextView
@@ -401,7 +401,7 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/whitney"
+                            android:src="@drawable/edited_johann"
                             app:shapeAppearanceOverlay="@style/RoundedImageView" />
 
                         <TextView
