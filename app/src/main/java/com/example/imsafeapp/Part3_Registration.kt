@@ -19,6 +19,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.Query
@@ -53,6 +56,8 @@ class Part3_Registration : AppCompatActivity() {
     private lateinit var confirm_password: String
     private lateinit var phone: String
 
+    private lateinit var databaseReference: DatabaseReference
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,8 +75,6 @@ class Part3_Registration : AppCompatActivity() {
             openFileChooser()
         }
 
-
-
         // Terms & Conditions
         termsAndConditionsLink.setOnClickListener {
             // Load terms and conditions from string resource
@@ -88,23 +91,82 @@ class Part3_Registration : AppCompatActivity() {
                 .show()
         }
 
-
-
         //Verifications for EmailId & Password
         complete_registration.setOnClickListener {
-
             saveDataToFirestore()
 
-            val intent = Intent(this, Homepage::class.java)
+            Log.d("QWE", "2nd button clicked")
+            val firstname = intent.getStringExtra("firstname")
+            val lastname = intent.getStringExtra("lastname")
+            val email = intent.getStringExtra("email")
+            val password = intent.getStringExtra("password")
+            val cUserName="$firstname $lastname"
+            registerUser(cUserName, email!!, password!!)
+
+
+            /*val intent = Intent(this, Homepage::class.java)
             startActivity(intent)
-            finish()
+            finish()*/
         }
-
-
-
 
     }
 
+    private fun registerUser(userName: String, email: String, password: String) {
+        Log.d("QWE", "inside registerUser()")
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) {
+                if (it.isSuccessful) {
+                    val user: FirebaseUser? = auth.currentUser
+                    val userId: String = user!!.uid
+
+                    val contact1_name = findViewById<EditText>(R.id.editTextEmergencyContact1Name).text.toString()
+                    val contact1_number = findViewById<EditText>(R.id.editTextEmergencyContact1Number).text.toString()
+                    val contact2_name = findViewById<EditText>(R.id.editTextEmergencyContact2Name).text.toString()
+                    val contact2_number = findViewById<EditText>(R.id.editTextEmergencyContact2Number).text.toString()
+                    val blood_group = findViewById<EditText>(R.id.BloodGroup).text.toString()
+
+                    val firstname = intent.getStringExtra("firstname")
+                    val lastname = intent.getStringExtra("lastname")
+                    val gender = intent.getStringExtra("gender")
+                    val age = intent.getStringExtra("age")
+                    val selectedConstituency = intent.getStringExtra("selectedConstituency")
+                    val address = intent.getStringExtra("address")
+                    val PhoneNumber = intent.getStringExtra("PhoneNumber")
+
+
+                    databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userId)
+                    val hashMap: HashMap<String, String> = HashMap()
+                    hashMap.put("userId", userId)
+                    hashMap.put("profileImage", "")
+
+                    hashMap.put("userName", userName)
+                    hashMap.put("firstname", firstname!!)
+                    hashMap.put("lastname", lastname!!)
+                    hashMap.put("gender", gender!!)
+                    hashMap.put("age", age!!)
+                    hashMap.put("selectedConstituency", selectedConstituency!!)
+                    hashMap.put("address", address!!)
+
+                    hashMap.put("email", email)
+                    hashMap.put("password", password)
+                    hashMap.put("PhoneNumber", PhoneNumber!!)
+
+                    hashMap.put("contact1_name", contact1_name)
+                    hashMap.put("contact1_number", contact1_number)
+                    hashMap.put("contact2_name", contact2_name)
+                    hashMap.put("contact2_number", contact2_number)
+                    hashMap.put("blood_group", blood_group)
+
+                    databaseReference.setValue(hashMap).addOnCompleteListener(this) {
+                        if (it.isSuccessful) {
+                            val intent = Intent(this@Part3_Registration, Homepage::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+                }
+            }
+    }
 
     private fun saveDataToFirestore() {
         // Collect registration data from Part 1

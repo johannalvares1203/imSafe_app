@@ -47,8 +47,6 @@ class Part2_Registration : AppCompatActivity() {
     private lateinit var phone: String
 
 
-    private lateinit var databaseReference: DatabaseReference
-
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,16 +91,26 @@ class Part2_Registration : AppCompatActivity() {
         continue_2.setOnClickListener {
             saveDataToFirestore()
 
-            Log.d("QWE", "2nd button clicked")
             val firstname = intent.getStringExtra("firstname")
             val lastname = intent.getStringExtra("lastname")
-            val cUserName="$firstname $lastname"
-            registerUser(cUserName, email.text.toString(), password.text.toString())
+            val gender = intent.getStringExtra("gender")
+            val age = intent.getStringExtra("age")
+            val selectedConstituency = intent.getStringExtra("selectedConstituency")
+            val address = intent.getStringExtra("address")
 
+            val intent = Intent(this, Part3_Registration::class.java)
+            intent.putExtra("firstname", firstname)
+            intent.putExtra("lastname", lastname)
+            intent.putExtra("gender", gender)
+            intent.putExtra("age", age)
+            intent.putExtra("selectedConstituency", selectedConstituency)
+            intent.putExtra("address", address)
 
-            /*val intent = Intent(this, Part3_Registration::class.java)
+            intent.putExtra("email", email.text.toString())
+            intent.putExtra("password", password.text.toString())
+            intent.putExtra("PhoneNumber", PhoneNumber.text.toString())
             startActivity(intent)
-            finish()*/
+            finish()
 
 //            vibrator.vibrate(10000)
 //            val email = email.text.toString().trim()
@@ -159,55 +167,6 @@ class Part2_Registration : AppCompatActivity() {
             }
             vibrator.vibrate(1000)
         }
-    }
-
-    private fun registerUser(userName: String, email: String, password: String) {
-        Log.d("QWE", "inside registerUser()")
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) {
-                if (it.isSuccessful) {
-                    val user: FirebaseUser? = auth.currentUser
-                    val userId: String = user!!.uid
-
-                    val firstname = intent.getStringExtra("firstname")
-                    val lastname = intent.getStringExtra("lastname")
-                    val gender = intent.getStringExtra("gender")
-                    val age = intent.getStringExtra("age")
-                    val selectedConstituency = intent.getStringExtra("selectedConstituency")
-                    val address = intent.getStringExtra("address")
-
-                    databaseReference =
-                        FirebaseDatabase.getInstance().getReference("Users").child(userId)
-
-                    val hashMap: HashMap<String, String> = HashMap()
-                    hashMap.put("userId", userId)
-                    hashMap.put("profileImage", "")
-
-                    hashMap.put("userName", userName)
-                    hashMap.put("firstname", firstname!!)
-                    hashMap.put("lastname", lastname!!)
-                    hashMap.put("gender", gender!!)
-                    hashMap.put("age", age!!)
-                    hashMap.put("selectedConstituency", selectedConstituency!!)
-                    hashMap.put("address", address!!)
-
-                    hashMap.put("email", email)
-                    hashMap.put("password", password)
-                    //val phoneNumber: EditText = findViewById(R.id.phoneNumber)
-                    hashMap.put("PhoneNumber", findViewById<EditText>(R.id.phoneNumber).text.toString())
-
-                    databaseReference.setValue(hashMap).addOnCompleteListener(this) {
-                        if (it.isSuccessful) {
-                            val intent = Intent(
-                                this@Part2_Registration,
-                                Part3_Registration::class.java
-                            )
-                            startActivity(intent)
-                            finish()
-                        }
-                    }
-                }
-            }
     }
 
     private fun saveDataToFirestore() {
