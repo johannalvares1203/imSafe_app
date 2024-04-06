@@ -9,10 +9,17 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.imsafeapp.chat.activity.UsersActivity
+import com.example.imsafeapp.community.admin.RequestsActivity
+import com.example.imsafeapp.community.user.CommunityActivity
+import com.example.imsafeapp.community.user.CommunityFeedActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
 class Homepage : AppCompatActivity() {
@@ -78,7 +85,24 @@ class Homepage : AppCompatActivity() {
                     true
                 }
                 R.id.community -> {
-                    // Handle Sub Option 1 click
+                    startActivity(Intent(this@Homepage, RequestsActivity::class.java))
+
+                    /*val userId = FirebaseAuth.getInstance().currentUser?.uid
+                    val requestRef = FirebaseDatabase.getInstance().getReference("Requests").child(userId!!)
+                    requestRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            val approved = dataSnapshot.child("approved").value as? Boolean?: false
+                            if (approved) {
+                                startActivity(Intent(this@Homepage, CommunityFeedActivity::class.java))
+                            } else {
+                                startActivity(Intent(this@Homepage, CommunityActivity::class.java))
+                            }
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            //possible errors
+                        }
+                    })*/
                     true
                 }
                 else -> false
