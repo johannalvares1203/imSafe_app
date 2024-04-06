@@ -98,7 +98,6 @@ class Part2_Registration : AppCompatActivity() {
             val selectedConstituency = intent.getStringExtra("selectedConstituency")
             val address = intent.getStringExtra("address")
 
-            val intent = Intent(this, Part3_Registration::class.java)
             intent.putExtra("firstname", firstname)
             intent.putExtra("lastname", lastname)
             intent.putExtra("gender", gender)
@@ -112,36 +111,35 @@ class Part2_Registration : AppCompatActivity() {
             startActivity(intent)
             finish()
 
-//            vibrator.vibrate(10000)
-//            val email = email.text.toString().trim()
-//            val password = password.text.toString().trim()
-//            val confirmPassInput = confirm_pass.text.toString().trim()
-//
-//            when {
-//                email.isEmpty() || password.isEmpty() || confirmPassInput.isEmpty() -> {
-//                    Toast.makeText(this, "Empty Fields Are not Allowed!!", Toast.LENGTH_SHORT).show()
-//                }
-//                password != confirmPassInput -> {
-//                    Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
-//                }
-//                !isValidEmail(email) -> {
-//                    Toast.makeText(this, "Invalid Email Format", Toast.LENGTH_SHORT).show()
-//                }
-//                password.length <= 6 -> {
-//                    Toast.makeText(this, "Password should be greater than 6 characters", Toast.LENGTH_SHORT).show()
-//                }
-//                !isPasswordComplex(password) -> {
-//                    Toast.makeText(this, "Password should contain letters, symbols, and numbers", Toast.LENGTH_SHORT).show()
-//                }
-//                else -> {
-//                    // Registration conditions met, navigate to Homepage
-//                    val intent = Intent(this, Homepage::class.java)
-//                    // Pass the email to the Homepage activity
-//                    intent.putExtra("USER_EMAIL", email)
-//                    startActivity(intent)
-//                    finish() // Finish the current activity to remove it from the stack
-//                }
-//            }
+            vibrator.vibrate(1000)
+            val email = email.text.toString().trim()
+            val password = password.text.toString().trim()
+            val confirmPassInput = confirm_pass.text.toString().trim()
+
+            when {
+                email.isEmpty() || password.isEmpty() || confirmPassInput.isEmpty() -> {
+                    Toast.makeText(this, "Empty Fields Are not Allowed!!", Toast.LENGTH_SHORT).show()
+                }
+                password != confirmPassInput -> {
+                    Toast.makeText(this, "Passwords do not match", Toast.LENGTH_LONG).show()
+                }
+                !isValidEmail(email) -> {
+                    Toast.makeText(this, "Invalid Email Format", Toast.LENGTH_SHORT).show()
+                }
+                password.length <= 6 -> {
+                    Toast.makeText(this, "Password should be greater than 6 characters", Toast.LENGTH_SHORT).show()
+                }
+                !isPasswordComplex(password) -> {
+                    Toast.makeText(this, "Password should contain letters, symbols, and numbers", Toast.LENGTH_LONG).show()
+                }
+                else -> {
+                    // Registration conditions met, navigate to Homepage
+                    val intent = Intent(this, Part3_Registration::class.java)
+                    // Pass the email to the Homepage activity
+                    startActivity(intent)
+                    finish() // Finish the current activity to remove it from the stack
+                }
+            }
         }
 
         //Verifications for Phone Numbers

@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.example.imsafeapp.counsellor.Counsellor_Homepage
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -67,13 +68,28 @@ class LoginActivity : AppCompatActivity() {
                 val adminEmail = "admin@gmail.com"
                 val adminPassword = "Admin@123"
 
+                // Hardcoded counselor credentials
+                val counselorEmail = "counselor"
+                val counselorPassword = "counselor"
+
                 if (email == adminEmail && password == adminPassword) {
                     // Admin login, start the admin activity or intent
-                    val adminIntent = android.content.Intent(this, Homepage::class.java)
+                    val adminIntent = android.content.Intent(this, Counsellor_Homepage::class.java)
                     startActivity(adminIntent)
 
                     // Display notification for admin login
                     showAdminNotification()
+
+                    // Clear the email and password fields
+                    emailEditText.text.clear()
+                    passwordEditText.text.clear()
+                } else if (email == counselorEmail && password == counselorPassword) {
+                    // Counselor login, start the counselor activity or intent
+                    val counselorIntent = android.content.Intent(this, Counsellor_Homepage::class.java)
+                    startActivity(counselorIntent)
+
+                    // Display notification for counselor login
+                    showCounselorNotification()
 
                     // Clear the email and password fields
                     emailEditText.text.clear()
@@ -86,6 +102,7 @@ class LoginActivity : AppCompatActivity() {
                 android.widget.Toast.makeText(this, "Empty Fields Are not Allowed !!", android.widget.Toast.LENGTH_SHORT).show()
             }
         }
+
 
         PhoneNoButton.setOnClickListener {
             val intent = android.content.Intent(this, PhoneNumber::class.java)
@@ -116,6 +133,33 @@ class LoginActivity : AppCompatActivity() {
             signInGoogle()
         }
     }
+
+
+    private fun showCounselorNotification() {
+        // You can use NotificationManager to display notifications
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        // Create a notification channel for devices running Android Oreo (API 26) and above
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "counselor_channel_id",
+                "Counselor Channel",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        // Create a notification
+        val notificationBuilder = NotificationCompat.Builder(this, "counselor_channel_id")
+            .setSmallIcon(R.drawable.ic_launcher_background) // Set your small icon here
+            .setContentTitle("Counselor Login") // Set your notification title
+            .setContentText("You have logged in as a counselor.") // Set your notification message
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        // Show the notification
+        notificationManager.notify(1, notificationBuilder.build())
+    }
+
 
     private fun signInWithEmailAndPassword(email: String, password: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
