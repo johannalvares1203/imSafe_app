@@ -87,7 +87,7 @@ class UsersActivity : AppCompatActivity() {
                 for (dataSnapShot: DataSnapshot in snapshot.children) {
                     val user = dataSnapShot.getValue(User::class.java)
 
-                    if (!user!!.userId.equals(firebase.uid)) {
+                    if (!user!!.userId.equals(firebase.uid) && !user!!.role.equals("counsellor")) {
                         userList.add(user)
                     }
                 }

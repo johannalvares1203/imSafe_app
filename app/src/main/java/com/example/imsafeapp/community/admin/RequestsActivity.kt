@@ -8,6 +8,7 @@ import com.example.imsafeapp.R
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 
 class RequestsActivity : AppCompatActivity() {
@@ -25,7 +26,10 @@ class RequestsActivity : AppCompatActivity() {
         val requestRef = FirebaseDatabase.getInstance().getReference("Requests")
         var requests: List<Request> = listOf()
 
-        requestRef.addValueEventListener(object : ValueEventListener {
+        // Filter requests with "approved" set to false
+        val filteredRequestsQuery: Query = requestRef.orderByChild("approved").equalTo(false)
+
+        filteredRequestsQuery.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 requests = dataSnapshot.children.mapNotNull { it.getValue(Request::class.java) }
 

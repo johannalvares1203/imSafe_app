@@ -54,7 +54,7 @@ class Counsellor_Homepage : AppCompatActivity() {
         }
 
         chatwithcounsellor.setOnClickListener {
-            startActivity(Intent(this, CounsellorsActivity::class.java))
+            startActivity(Intent(this, UsersActivity::class.java))
             finish()
         }
 

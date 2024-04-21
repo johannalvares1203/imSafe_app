@@ -40,6 +40,15 @@
             android:name=".counsellor.Counsellor_Homepage"
             android:exported="false" />
         <activity
+            android:name=".community.user.CommunityFeedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".community.admin.RequestsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".community.user.CommunityActivity"
+            android:exported="false" />
+        <activity
             android:name=".SMS_Activity"
             android:exported="false" />
         <activity
@@ -119,6 +128,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

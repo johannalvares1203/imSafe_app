@@ -98,19 +98,6 @@ class Part2_Registration : AppCompatActivity() {
             val selectedConstituency = intent.getStringExtra("selectedConstituency")
             val address = intent.getStringExtra("address")
 
-            intent.putExtra("firstname", firstname)
-            intent.putExtra("lastname", lastname)
-            intent.putExtra("gender", gender)
-            intent.putExtra("age", age)
-            intent.putExtra("selectedConstituency", selectedConstituency)
-            intent.putExtra("address", address)
-
-            intent.putExtra("email", email.text.toString())
-            intent.putExtra("password", password.text.toString())
-            intent.putExtra("PhoneNumber", PhoneNumber.text.toString())
-            startActivity(intent)
-            finish()
-
             vibrator.vibrate(1000)
             val email = email.text.toString().trim()
             val password = password.text.toString().trim()
@@ -135,9 +122,20 @@ class Part2_Registration : AppCompatActivity() {
                 else -> {
                     // Registration conditions met, navigate to Homepage
                     val intent = Intent(this, Part3_Registration::class.java)
-                    // Pass the email to the Homepage activity
+
+                    intent.putExtra("firstname", firstname)
+                    intent.putExtra("lastname", lastname)
+                    intent.putExtra("gender", gender)
+                    intent.putExtra("age", age)
+                    intent.putExtra("selectedConstituency", selectedConstituency)
+                    intent.putExtra("address", address)
+
+                    intent.putExtra("email", email)
+                    intent.putExtra("password", password)
+                    intent.putExtra("PhoneNumber", PhoneNumber.text.toString())
+                    Log.d("QWE", "$email $password $firstname $lastname")
                     startActivity(intent)
-                    finish() // Finish the current activity to remove it from the stack
+                    finish()
                 }
             }
         }

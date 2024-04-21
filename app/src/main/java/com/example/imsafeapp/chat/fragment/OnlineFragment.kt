@@ -68,7 +68,7 @@ class OnlineFragment : Fragment() {
                 for (dataSnapShot: DataSnapshot in snapshot.children) {
                     val user = dataSnapShot.getValue(User::class.java)
 
-                    if (user!!.online && !user!!.userId.equals(firebase.uid)) {
+                    if (user!!.online && !user!!.userId.equals(firebase.uid) && user!!.role.equals("counsellor")) {
                         userList.add(user)
                     }
                 }

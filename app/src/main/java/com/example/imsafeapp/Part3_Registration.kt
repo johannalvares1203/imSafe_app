@@ -101,6 +101,9 @@ class Part3_Registration : AppCompatActivity() {
             val email = intent.getStringExtra("email")
             val password = intent.getStringExtra("password")
             val cUserName="$firstname $lastname"
+            Log.d("QWE", "$firstname")
+            Log.d("QWE", "$email $password $cUserName")
+
             registerUser(cUserName, email!!, password!!)
 
 
@@ -139,6 +142,8 @@ class Part3_Registration : AppCompatActivity() {
                     hashMap.put("userId", userId)
                     hashMap.put("profileImage", "")
 
+                    Log.d("QWE", "inside hashmap")
+
                     hashMap.put("userName", userName)
                     hashMap.put("firstname", firstname!!)
                     hashMap.put("lastname", lastname!!)
@@ -156,6 +161,10 @@ class Part3_Registration : AppCompatActivity() {
                     hashMap.put("contact2_name", contact2_name)
                     hashMap.put("contact2_number", contact2_number)
                     hashMap.put("blood_group", blood_group)
+
+                    hashMap.put("role", "user")
+                    //hashMap.put("role", "counsellor")
+                    hashMap.put("role", "volunteer")
 
                     databaseReference.setValue(hashMap).addOnCompleteListener(this) {
                         if (it.isSuccessful) {

@@ -30,13 +30,14 @@ class CommunityViewHolder(itemView: View, private val communities: List<String>,
                         if (dataSnapshot.exists()) {
                             Toast.makeText(itemView.context, "You have already sent a request", Toast.LENGTH_SHORT).show()
                         } else {
-                            val requestId = requestRef.push().key
+                            //val requestId = requestRef.push().key
                             val request = hashMapOf(
                                 "userId" to userId,
                                 "constituency" to community,
                                 "approved" to false
                             )
-                            requestId?.let { requestRef.child(it).setValue(request) }
+                            //requestId?.let { requestRef.child(it).setValue(request) }
+                            requestRef.child(userId!!).setValue(request)
                             Toast.makeText(itemView.context, "Request sent to admin", Toast.LENGTH_SHORT).show()
 
                             //val intent = Intent(itemView.context, RequestsActivity::class.java)
