@@ -139,12 +139,12 @@ class Homepage : AppCompatActivity() {
                                 Log.w("QWE", role)
                                 startActivity(Intent(this@Homepage, RequestsActivity::class.java))
                             } else {
-                                Log.w("TAG", "Unknown user role: $role")
+                                Log.w("QWE", "Unknown user role: $role")
                             }
                         }
 
                         override fun onCancelled(databaseError: DatabaseError) {
-                            Log.w("TAG", "Error reading user role:", databaseError.toException())
+                            Log.w("QWE", "Error reading user role:", databaseError.toException())
                         }
                     })
 
