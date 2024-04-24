@@ -8,6 +8,16 @@
     tools:context=".community.admin.RequestsActivity"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/user_id_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="Join Community Requests"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRequests"
         android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.example.imsafeapp.community.user
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,8 @@ class CommunityFeedActivity : AppCompatActivity() {
 
     private val btnJoinCommunity: Button
         get()=findViewById(R.id.btnJoinCommunity)
+    private val tvCommunity: TextView
+        get()=findViewById(R.id.tvCommunity)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,23 @@ class CommunityFeedActivity : AppCompatActivity() {
 
         val database = FirebaseDatabase.getInstance()
         val requestsRef = database.getReference("Requests")
+
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        val userRef = userId?.let { database.getReference("Users").child(it) }
+
+        userRef?.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    val user = dataSnapshot.getValue(User::class.java)
+                    val constituency = user?.selectedConstituency
+                    tvCommunity.text = constituency
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle onCancelled
+            }
+        })
 
         requestsRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {

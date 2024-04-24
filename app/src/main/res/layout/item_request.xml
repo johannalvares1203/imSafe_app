@@ -2,33 +2,60 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="bottom|end">
 
-    <TextView
-        android:id="@+id/user_id_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        tools:text="dcjinhucfercfb"/>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_weight="0"
+        android:padding="4dp"
+        android:src="@drawable/profile_image"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_weight="3"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/constituency_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="16sp"
-            tools:text="dcjinhucfercfb" />
-
-        <Button
-            android:id="@+id/approve_button"
+            android:id="@+id/user_id_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Approve" />
+            android:textSize="16sp"
+            tools:text="dcjinhucfercfb"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
+
+            <Button
+                android:id="@+id/approve_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Approve"
+                android:layout_weight="1"/>
+
+            <!-- Add an empty view to push the button to the right -->
+        </LinearLayout>
+
     </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/btnCancal"
+        android:layout_width="40dp"
+        android:layout_weight="0"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:src="@drawable/x"/>
+
 </LinearLayout>

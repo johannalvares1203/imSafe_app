@@ -130,6 +130,14 @@
                         android:background="#00000000"
                         android:src="@drawable/ic_attachment"
                         android:text="Send File" />
+
+                    <ImageButton
+                        android:id="@+id/btnCamera"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="#00000000"
+                        android:src="@drawable/camera"
+                        android:text="Send Image" />
                 </LinearLayout>
 
                 <ImageButton

@@ -17,8 +17,8 @@ class RequestAdapter(private val requests: List<Request>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: RequestViewHolder, position: Int) {
         val request = requests[position]
-        holder.constituencyName.text = request.constituency
-        holder.userIdText.text = request.userId
+        holder.userIdText.text = request.userName
+
         holder.approveButton.setOnClickListener {
             val userId = requests[position].userId ?: ""
             val constituency = request.constituency // Access constituency directly from the request object
@@ -26,6 +26,10 @@ class RequestAdapter(private val requests: List<Request>) : RecyclerView.Adapter
             val phoneNumber = request.phoneNumber
             Log.d("QWE", "approve btn clicked $userId")
             updateRequestApprovalStatus(userId, constituency!!, userName!!, phoneNumber!!)
+        }
+        holder.btnCancal.setOnClickListener {
+            val userId = requests[position].userId ?: ""
+            deleteRequest(userId)
         }
     }
 
@@ -54,6 +58,17 @@ class RequestAdapter(private val requests: List<Request>) : RecyclerView.Adapter
             }
     }
 
+    private fun deleteRequest(userId: String) {
+        val database = FirebaseDatabase.getInstance()
+        val requestRef: DatabaseReference = database.getReference("Requests").child(userId)
 
+        requestRef.removeValue()
+            .addOnSuccessListener {
+                println("Request deleted successfully for userId: $userId")
+            }
+            .addOnFailureListener { exception ->
+                println("Error deleting request for userId: $userId: $exception")
+            }
+    }
 
 }

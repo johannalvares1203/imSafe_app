@@ -1,8 +1,13 @@
 package com.example.imsafeapp.chat.activity
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -31,6 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 import java.lang.Exception
 import java.util.*
 import kotlin.collections.HashMap
@@ -54,6 +60,8 @@ class ChatActivity : AppCompatActivity() {
         get() = findViewById(R.id.etMessage)
     private val btnSendFile: ImageButton
         get() = findViewById(R.id.btnSendFile)
+    private val btnCamera: ImageButton
+        get() = findViewById(R.id.btnCamera)
     private val progressBar: ProgressBar
         get() = findViewById(R.id.progressBar)
 
@@ -64,6 +72,8 @@ class ChatActivity : AppCompatActivity() {
 
     private lateinit var userId: String
     private val PICK_FILE_REQUEST = 1
+    private val REQUEST_IMAGE_CAPTURE = 2
+    private val CAMERA_PERMISSION_REQUEST_CODE = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +85,10 @@ class ChatActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "*/*"
             startActivityForResult(intent, PICK_FILE_REQUEST)
+        }
+
+        btnCamera.setOnClickListener {
+            dispatchTakePictureIntent()
         }
 
 
@@ -149,15 +163,54 @@ class ChatActivity : AppCompatActivity() {
     }
 
 
+    private fun dispatchTakePictureIntent() {
+        if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            startCameraActivity()
+        } else {
+            requestPermissions(arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_REQUEST_CODE)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startCameraActivity()
+            } else {
+                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun startCameraActivity() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (takePictureIntent.resolveActivity(packageManager) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        } else {
+            Toast.makeText(this, "Camera is not available", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == PICK_FILE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
             val filePath = data.data!!
             uploadFile(filePath)
+        } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            val uri = getImageUri(applicationContext, imageBitmap)
+            uploadFile(uri)
         }
     }
 
+    private fun getImageUri(inContext: Context, inImage: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "Title", null)
+        return Uri.parse(path)
+    }
 
     private fun uploadFile(filePath: Uri) {
 

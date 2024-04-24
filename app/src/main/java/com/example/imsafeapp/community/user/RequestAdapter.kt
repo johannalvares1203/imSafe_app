@@ -20,7 +20,7 @@ class RequestAdapter(private val requestList: List<Request>) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: RequestViewHolder, position: Int) {
         val currentItem = requestList[position]
-        holder.userNameTextView.text = currentItem.userName
+        holder.userNameTextView.text = "Name: ${currentItem.userName}"
     }
 
     override fun getItemCount() = requestList.size
