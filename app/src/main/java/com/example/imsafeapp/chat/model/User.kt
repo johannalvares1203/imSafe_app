@@ -5,5 +5,6 @@ data class User(
     var userName: String = "",
     var profileImage: String = "",
     var online: Boolean = false,
-    var role: String = ""
+    var role: String = "",
+    var PhoneNumber: String = ""
 )

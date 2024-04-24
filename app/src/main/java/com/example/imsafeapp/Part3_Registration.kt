@@ -175,7 +175,7 @@ class Part3_Registration : AppCompatActivity() {
                     hashMap.put("address", address!!)
 
                     hashMap.put("email", email)
-                    hashMap.put("password", password)
+                    //hashMap.put("password", password)
                     hashMap.put("PhoneNumber", PhoneNumber!!)
 
                     hashMap.put("contact1_name", contact1_name)
@@ -186,7 +186,7 @@ class Part3_Registration : AppCompatActivity() {
 
                     hashMap.put("role", "user")
                     //hashMap.put("role", "counsellor")
-                    hashMap.put("role", "volunteer")
+                    //hashMap.put("role", "volunteer")
 
                     databaseReference.setValue(hashMap).addOnCompleteListener(this) {
                         if (it.isSuccessful) {
