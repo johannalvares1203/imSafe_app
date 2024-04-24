@@ -46,6 +46,8 @@ class ChatActivity : AppCompatActivity() {
         get() = findViewById(R.id.imgProfile)
     private val tvUserName: TextView
         get() = findViewById(R.id.tvUserName)
+    private val tvPhone: TextView
+        get() = findViewById(R.id.tvPhone)
     private val btnSendMessage: ImageButton
         get() = findViewById(R.id.btnSendMessage)
     private val etMessage: EditText
@@ -102,6 +104,7 @@ class ChatActivity : AppCompatActivity() {
 
                 val user = snapshot.getValue(User::class.java)
                 tvUserName.text = user!!.userName
+                tvPhone.text = user.PhoneNumber
                 if (user.profileImage == "") {
                     imgProfile.setImageResource(R.drawable.profile_image)
                 } else {
@@ -109,6 +112,18 @@ class ChatActivity : AppCompatActivity() {
                 }
             }
         })
+
+        tvPhone.setOnClickListener {
+            val phoneNumber = tvPhone.text.toString()
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:$phoneNumber")
+
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "You don't have an app to handle this action", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         btnSendMessage.setOnClickListener {
             var message: String = etMessage.text.toString()
