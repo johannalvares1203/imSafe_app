@@ -34,6 +34,18 @@
         android:theme="@style/Theme.ImSAFEApp"
         tools:targetApi="31">
         <activity
+            android:name=".melissa.LocationFragment"
+            android:exported="false" />
+        <activity
+            android:name=".melissa.MainActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".melissa.ReportIncident"
+            android:exported="false" />
+        <activity
+            android:name=".main_admin.ViewDetails"
+            android:exported="false" />
+        <activity
             android:name=".counsellor.AboutUs_Counselor"
             android:exported="false" />
         <activity
@@ -52,16 +64,16 @@
             android:name=".SMS_Activity"
             android:exported="false" />
         <activity
-            android:name=".Admin_Update"
+            android:name=".main_admin.Admin_Update"
             android:exported="false" />
         <activity
-            android:name=".Admin_Upload"
+            android:name=".main_admin.Admin_Upload"
             android:exported="false" />
         <activity
-            android:name=".Admin_Delete"
+            android:name=".main_admin.Admin_Delete"
             android:exported="false" />
         <activity
-            android:name=".Admin_Add"
+            android:name=".main_admin.Admin_Add"
             android:exported="false" />
         <activity
             android:name=".AddMedia"
@@ -96,7 +108,8 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAlYQJnmY0bklqDfqZ5l9w069ohniV1FyA" />
+            android:value="AIzaSyAlYQJnmY0bklqDfqZ5l9w069ohniV1FyA"
+            />
 
         <activity
             android:name=".Profile_Settings"
@@ -128,7 +141,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

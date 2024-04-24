@@ -1,11 +1,15 @@
 package com.example.imsafeapp
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Vibrator
 import android.text.Html
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -19,6 +23,7 @@ import com.squareup.picasso.Picasso
 
 class Profile_Settings : AppCompatActivity() {
 
+    private lateinit var vibrator: Vibrator
     private lateinit var auth: FirebaseAuth
 
     @SuppressLint("MissingInflatedId")
@@ -32,6 +37,7 @@ class Profile_Settings : AppCompatActivity() {
         val termsandconditions: TextView = findViewById(R.id.termsAndConditionsLink)
         val changepassword: TextView = findViewById(R.id.changepassword)
 
+        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         auth = FirebaseAuth.getInstance()
 
         // Retrieve the phone number from the Intent extras
@@ -46,17 +52,14 @@ class Profile_Settings : AppCompatActivity() {
 
         //Lets the user log out of his profile.
         logout.setOnClickListener {
-            val currentUser = auth.currentUser
-            if (currentUser != null && currentUser.providerData.any { it.providerId == GoogleAuthProvider.PROVIDER_ID }) {
-                // Google Sign Out
-                signOutGoogle()
-            }
+            signOutGoogle()
+            vibrateForTwoSeconds()
 
-            // Firebase Sign Out
-            auth.signOut()
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+
+
 
         //Lets the user change their password
         changepassword.setOnClickListener {
@@ -145,12 +148,52 @@ class Profile_Settings : AppCompatActivity() {
 
     }
 
-    private fun signOutGoogle() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
-        val googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        googleSignInClient.signOut().addOnCompleteListener(this) {
-            // Handle Google Sign Out completion if needed
+    private fun vibrateForTwoSeconds() {
+        // Check if the device supports vibration
+        if (vibrator.hasVibrator()) {
+            // Vibrate for two seconds (2000 milliseconds)
+            vibrator.vibrate(2000)
         }
     }
+
+    private fun signOutGoogle() {
+        // Configure Google Sign-In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.web_client_id))
+            .requestEmail()
+            .build()
+
+        // Create a GoogleSignInClient with the options specified by gso
+        val googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        // Sign out Google account
+        googleSignInClient.signOut()
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Google sign out successful
+                    Log.d(TAG, "Google sign out successful")
+                    // Clear the name, email, and profile image
+                    clearAccountDetails()
+                } else {
+                    // Google sign out failed
+                    Log.w(TAG, "Google sign out failed", task.exception)
+                }
+            }
+    }
+
+    private fun clearAccountDetails() {
+        // Find the TextViews and ImageView by their IDs
+        val nameTextView = findViewById<TextView>(R.id.nameTextView)
+        val emailTextView = findViewById<TextView>(R.id.emailTextView)
+        val profileImageView = findViewById<ImageView>(R.id.profileImageView)
+        val phone: TextView = findViewById(R.id.phoneTextView)
+
+        // Clear the text and image
+        nameTextView.text = ""
+        emailTextView.text = ""
+        profileImageView.setImageDrawable(null)
+        phone.text = ""
+    }
+
+
 }

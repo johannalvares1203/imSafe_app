@@ -14,10 +14,12 @@ import android.text.Html
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
@@ -91,6 +93,14 @@ class Part3_Registration : AppCompatActivity() {
                 .show()
         }
 
+        complete_registration.isEnabled = false // Disable the button by default
+
+        val checkBox: CheckBox = findViewById(R.id.checkbox)
+
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            complete_registration.isEnabled = isChecked // Enable or disable the button based on checkbox state
+        }
+
         //Verifications for EmailId & Password
         complete_registration.setOnClickListener {
             saveDataToFirestore()
@@ -111,6 +121,18 @@ class Part3_Registration : AppCompatActivity() {
             startActivity(intent)
             finish()*/
         }
+
+
+        //For Blood Group
+        val bloodGroupEditText: TextInputEditText = findViewById(R.id.BloodGroup)
+        bloodGroupEditText.isEnabled = false // Disable the EditText by default
+
+        val checkBox1: CheckBox = findViewById(R.id.includeBloodGroup)
+
+        checkBox1.setOnCheckedChangeListener { _, isChecked ->
+            bloodGroupEditText.isEnabled = isChecked // Enable or disable the EditText based on checkbox state
+        }
+
 
     }
 

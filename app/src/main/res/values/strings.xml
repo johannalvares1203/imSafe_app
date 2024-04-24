@@ -7,6 +7,11 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="my_map_api_key">AIzaSyABonhr016s1ufsN2nUMKXEREFonQU4pdM</string>
+
+    <string name="web_client_id">1017782215736-m30s5ha0caa7ghc754jd9ia84jvde3op.apps.googleusercontent.com</string>
+
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

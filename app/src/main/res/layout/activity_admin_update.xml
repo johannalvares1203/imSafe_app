@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin_Update">
+    tools:context=".main_admin.Admin_Update">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,13 +20,13 @@
                 android:id="@+id/registrationTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Update User Info"
-                android:textSize="36sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
-                android:layout_gravity="center_horizontal" />
+                android:text="Update User Info"
+                android:textColor="@color/black"
+                android:textSize="36sp"
+                android:textStyle="bold" />
 
 
             <!-- First Name -->
@@ -34,24 +34,23 @@
                 android:id="@+id/firstNameInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="First Name:"
                 android:layout_marginTop="16dp"
+                android:hint="First Name:"
                 android:required="true"
                 app:boxBackgroundColor="@android:color/transparent"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#004AAD"
                 app:boxStrokeWidth="2dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusBottomEnd="8dp"
                 app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:required="true"
-                    />
+                    android:required="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,15 +59,15 @@
                 android:id="@+id/lastNameInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Last Name:"
                 android:layout_marginTop="16dp"
+                android:hint="Last Name:"
                 android:required="true"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#004AAD"
                 app:boxStrokeWidth="2dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusBottomEnd="8dp"
                 app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -80,34 +79,31 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
             <!-- Age -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ageInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Age:"
                 android:layout_marginTop="16dp"
+                android:hint="Age:"
                 android:required="true"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#004AAD"
                 app:boxStrokeWidth="2dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusBottomEnd="8dp"
                 app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextAge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:inputType="none"
-                    android:textColor="@android:color/black"
-                    android:enabled="false" />
+                    android:textColor="@android:color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <!--Date Of Birth picker -->
@@ -115,13 +111,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:cardCornerRadius="8dp"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#004AAD"
                 app:boxStrokeWidth="2dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusBottomEnd="8dp"
+                app:cardCornerRadius="8dp"
                 app:hintTextColor="@color/black">
 
                 <LinearLayout
@@ -134,41 +130,41 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:text="Date of Birth:"
-                        android:textSize="16sp"
                         android:textColor="@android:color/black"
-                        android:layout_gravity="start"/>
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
 
                         <!-- Day Spinner -->
                         <Spinner
                             android:id="@+id/daySpinner"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
                             android:required="true" />
 
                         <!-- Month Spinner -->
                         <Spinner
                             android:id="@+id/monthSpinner"
                             android:layout_width="0dp"
-                            android:layout_weight="1.5"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
+                            android:layout_weight="1.5"
                             android:required="true" />
 
                         <!-- Year Spinner -->
                         <Spinner
                             android:id="@+id/yearSpinner"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:required="true" />
                     </LinearLayout>
                 </LinearLayout>
@@ -179,13 +175,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:cardCornerRadius="8dp"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#004AAD"
                 app:boxStrokeWidth="2dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusBottomEnd="8dp"
+                app:cardCornerRadius="8dp"
                 app:hintTextColor="@color/black">
 
                 <LinearLayout
@@ -198,10 +194,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
                         android:text="Select Constituency:"
-                        android:textSize="16sp"
                         android:textColor="@android:color/black"
-                        android:layout_gravity="start"/>
+                        android:textSize="16sp" />
 
                     <!-- Spinner for Constituency Selection -->
                     <Spinner
@@ -220,15 +216,15 @@
                 android:id="@+id/textInputLayoutEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email:"
                 android:layout_marginTop="16dp"
+                android:hint="Email:"
                 android:required="true"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#004AAD"
                 app:boxStrokeWidth="2dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusBottomEnd="8dp"
                 app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -245,16 +241,16 @@
                 android:id="@+id/textInputLayoutPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password:"
                 android:layout_marginTop="16dp"
-                app:endIconMode="password_toggle"
+                android:hint="Password:"
                 android:required="true"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#004AAD"
                 app:boxStrokeWidth="2dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusBottomEnd="8dp"
+                app:endIconMode="password_toggle"
                 app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -271,16 +267,16 @@
                 android:id="@+id/textInputLayoutConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirm Password:"
                 android:layout_marginTop="16dp"
-                app:endIconMode="password_toggle"
+                android:hint="Confirm Password:"
                 android:required="true"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
                 app:boxStrokeColor="#004AAD"
                 app:boxStrokeWidth="2dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusBottomEnd="8dp"
+                app:endIconMode="password_toggle"
                 app:hintTextColor="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -293,13 +289,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/buttonnext"
+                android:id="@+id/UpdateData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Update"
-                android:backgroundTint="#004AAD"
                 android:layout_marginTop="16dp"
-                android:required="true" />
+                android:backgroundTint="#004AAD"
+                android:required="true"
+                android:text="Update" />
 
         </LinearLayout>
     </ScrollView>

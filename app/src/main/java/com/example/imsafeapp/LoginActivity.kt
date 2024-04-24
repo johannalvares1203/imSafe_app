@@ -20,6 +20,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.imsafeapp.counsellor.Counsellor_Homepage
+import com.example.imsafeapp.main_admin.Admin_Add
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -65,8 +66,8 @@ class LoginActivity : AppCompatActivity() {
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 // Hardcoded admin credentials
-                val adminEmail = "admin@gmail.com"
-                val adminPassword = "Admin@123"
+                val adminEmail = "admin"
+                val adminPassword = "admin"
 
                 // Hardcoded counselor credentials
                 val counselorEmail = "counselor"
@@ -74,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
 
                 if (email == adminEmail && password == adminPassword) {
                     // Admin login, start the admin activity or intent
-                    val adminIntent = android.content.Intent(this, Counsellor_Homepage::class.java)
+                    val adminIntent = android.content.Intent(this, Admin_Add::class.java)
                     startActivity(adminIntent)
 
                     // Display notification for admin login

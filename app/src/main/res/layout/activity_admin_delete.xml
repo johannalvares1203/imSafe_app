@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".Admin_Delete">
+    tools:context=".main_admin.Admin_Delete">
 
     <ImageView
         android:id="@+id/backgroundImageone"
@@ -26,7 +26,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:id="@+id/deletePhone"
+            android:id="@+id/deleteaccount"
             android:background="@drawable/lavender_border"
             android:layout_marginTop="150dp"
             android:layout_marginStart="10dp"

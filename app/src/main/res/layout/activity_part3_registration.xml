@@ -241,7 +241,7 @@
                 android:layout_gravity="center_horizontal">
 
                 <CheckBox
-                    android:id="@+id/checkBox"
+                    android:id="@+id/checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="I accept the "

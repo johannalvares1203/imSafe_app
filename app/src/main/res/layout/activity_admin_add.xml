@@ -1,100 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:padding="16dp">
-
 
     <ImageView
         android:id="@+id/backgroundImageone"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/admin_optionspic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:src="@drawable/admin_optionspic" />
 
     <Button
         android:id="@+id/mainUpload"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_marginTop="528dp"
+        android:layout_below="@id/backgroundImageone"
+        android:layout_marginTop="80dp"
         android:backgroundTint="#004AAD"
         android:text="Add User"
         android:textSize="18sp"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp" />
 
     <LinearLayout
         android:id="@+id/buttonLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_below="@id/mainUpload"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.605">
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mainUpdate"
             android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginEnd="10dp"
             android:backgroundTint="@color/white"
-            android:padding="16dp"
             android:text="Update"
             android:textColor="@color/lavender"
             android:textSize="18sp"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="16dp"
             app:cornerRadius="20dp"
             app:strokeColor="@color/lavender"
-            app:strokeWidth="2dp" /> <!-- Add marginEnd to create space -->
+            app:strokeWidth="2dp" />
+
+
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mainDelete"
             android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginStart="10dp"
             android:backgroundTint="@color/white"
-            android:padding="16dp"
             android:text="Delete"
             android:textColor="@color/lavender"
             android:textSize="18sp"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="16dp"
             app:cornerRadius="20dp"
             app:strokeColor="@color/lavender"
-            app:strokeWidth="2dp" /> <!-- Add marginStart to create space -->
+            app:strokeWidth="2dp"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/viewdata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonLayout"
+        android:layout_centerHorizontal="true"
+        android:text="View Data"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#004AAD"/>
 
     <TextView
         android:id="@+id/loginLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:clickable="true"
         android:text="Click Here to LogOut"
         android:textSize="20dp"
         android:textColor="@color/red"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.933" />
+        android:layout_marginBottom="20dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

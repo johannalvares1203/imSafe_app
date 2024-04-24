@@ -5,7 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.imsafeapp.chat.activity.CounsellorsActivity
@@ -13,6 +15,7 @@ import com.example.imsafeapp.chat.activity.UsersActivity
 import com.example.imsafeapp.community.admin.RequestsActivity
 import com.example.imsafeapp.community.user.CommunityActivity
 import com.example.imsafeapp.community.user.CommunityFeedActivity
+import com.example.imsafeapp.melissa.ReportIncident
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -36,7 +39,12 @@ class Homepage : AppCompatActivity() {
         Log.d("Homepage", "onCreate called")
         setContentView(R.layout.activity_homepage)
 
-        val police: Button = findViewById(R.id.reportinc)
+        val policeButton: ImageButton = findViewById(R.id.imageButton1)
+        val ambulanceButton: ImageButton = findViewById(R.id.imageButton2)
+        val fireButton: ImageButton = findViewById(R.id.imageButton3)
+
+        val ReportIncidentButton: Button = findViewById(R.id.reportinc)
+
         val chatwithcounsellor: Button = findViewById(R.id.chat)
         val redirect: ImageView = findViewById(R.id.profileIcon)
         val account = GoogleSignIn.getLastSignedInAccount(this)
@@ -82,10 +90,19 @@ class Homepage : AppCompatActivity() {
         }
 
 
-
-        police.setOnClickListener {
+        val onClickListener = View.OnClickListener {
             openPanicActivity()
         }
+
+        policeButton.setOnClickListener(onClickListener)
+        ambulanceButton.setOnClickListener(onClickListener)
+        fireButton.setOnClickListener(onClickListener)
+
+        ReportIncidentButton.setOnClickListener {
+            startActivity(Intent(this, ReportIncident::class.java))
+            finish()
+        }
+
 
         // for bottom menu
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
@@ -110,66 +127,70 @@ class Homepage : AppCompatActivity() {
                 }
                 R.id.community -> {
 
-                    databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.currentUser!!.uid)
-                    databaseReference.addValueEventListener(object : ValueEventListener {
-                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            val role = dataSnapshot.child("role").value?.toString() ?: ""
+                    val currentUser = auth.currentUser
+                    if (currentUser != null) {
+                        val userId = currentUser.uid
+                        val userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId)
 
-                            if (role == "user") {
-                                Log.w("QWE", role)
-                                val userId = FirebaseAuth.getInstance().currentUser?.uid
-                                val requestRef = FirebaseDatabase.getInstance().getReference("Requests").child(userId!!)
-                                requestRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                        val approved = dataSnapshot.child("approved").value as? Boolean?: false
-                                        if (approved) {
-                                            Log.w("QWE", approved.toString())
-                                            startActivity(Intent(this@Homepage, CommunityFeedActivity::class.java))
-                                        } else {
-                                            Log.w("QWE", approved.toString())
-                                            startActivity(Intent(this@Homepage, CommunityActivity::class.java))
+                        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    val role = dataSnapshot.child("role").value?.toString() ?: ""
+
+                                    when (role) {
+                                        "user" -> {
+                                            val requestRef = FirebaseDatabase.getInstance().getReference("Requests").child(userId)
+                                            requestRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                                                override fun onDataChange(requestSnapshot: DataSnapshot) {
+                                                    val approved = requestSnapshot.child("approved").getValue(Boolean::class.java) ?: false
+                                                    if (approved) {
+                                                        startActivity(Intent(this@Homepage, CommunityFeedActivity::class.java))
+                                                    } else {
+                                                        startActivity(Intent(this@Homepage, CommunityActivity::class.java))
+                                                    }
+                                                }
+
+                                                override fun onCancelled(databaseError: DatabaseError) {
+                                                    Log.e("TAG", "Error reading user request:", databaseError.toException())
+                                                }
+                                            })
                                         }
+                                        "volunteer" -> startActivity(Intent(this@Homepage, RequestsActivity::class.java))
+                                        else -> Log.w("TAG", "Unknown user role: $role")
                                     }
-
-                                    override fun onCancelled(databaseError: DatabaseError) {
-                                        //possible errors
-                                    }
-                                })
-                            } else if (role == "volunteer") {
-                                Log.w("QWE", role)
-                                startActivity(Intent(this@Homepage, RequestsActivity::class.java))
-                            } else {
-                                Log.w("TAG", "Unknown user role: $role")
+                                } else {
+                                    Log.e("TAG", "User data does not exist")
+                                }
                             }
-                        }
 
-                        override fun onCancelled(databaseError: DatabaseError) {
-                            Log.w("TAG", "Error reading user role:", databaseError.toException())
-                        }
-                    })
-
-
-
-
-/*
-                    startActivity(Intent(this@Homepage, RequestsActivity::class.java))
-
-                    val userId = FirebaseAuth.getInstance().currentUser?.uid
-                    val requestRef = FirebaseDatabase.getInstance().getReference("Requests").child(userId!!)
-                    requestRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            val approved = dataSnapshot.child("approved").value as? Boolean?: false
-                            if (approved) {
-                                startActivity(Intent(this@Homepage, CommunityFeedActivity::class.java))
-                            } else {
-                                startActivity(Intent(this@Homepage, CommunityActivity::class.java))
+                            override fun onCancelled(databaseError: DatabaseError) {
+                                Log.e("TAG", "Error reading user data:", databaseError.toException())
                             }
-                        }
+                        })
+                    } else {
+                        // User is not authenticated, handle this case accordingly
+                        // For example, you might redirect the user to the login screen
+                    }
 
-                        override fun onCancelled(databaseError: DatabaseError) {
-                            //possible errors
-                        }
-                    })*/
+                    /*
+                                        startActivity(Intent(this@Homepage, RequestsActivity::class.java))
+
+                                        val userId = FirebaseAuth.getInstance().currentUser?.uid
+                                        val requestRef = FirebaseDatabase.getInstance().getReference("Requests").child(userId!!)
+                                        requestRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                                val approved = dataSnapshot.child("approved").value as? Boolean?: false
+                                                if (approved) {
+                                                    startActivity(Intent(this@Homepage, CommunityFeedActivity::class.java))
+                                                } else {
+                                                    startActivity(Intent(this@Homepage, CommunityActivity::class.java))
+                                                }
+                                            }
+
+                                            override fun onCancelled(databaseError: DatabaseError) {
+                                                //possible errors
+                                            }
+                                        })*/
                     true
                 }
                 else -> false
