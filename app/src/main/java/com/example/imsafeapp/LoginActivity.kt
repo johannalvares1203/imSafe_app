@@ -106,7 +106,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         PhoneNoButton.setOnClickListener {
-            val intent = android.content.Intent(this, PhoneNumber::class.java)
+            val intent = android.content.Intent(this, MobilePhone::class.java)
             startActivity(intent)
             finish()
         }

@@ -15,6 +15,8 @@ import com.example.imsafeapp.chat.activity.UsersActivity
 import com.example.imsafeapp.community.admin.RequestsActivity
 import com.example.imsafeapp.community.user.CommunityActivity
 import com.example.imsafeapp.community.user.CommunityFeedActivity
+import com.example.imsafeapp.lisa.MainActivity
+import com.example.imsafeapp.main_admin.MainActivity1
 import com.example.imsafeapp.melissa.ReportIncident
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -99,7 +101,7 @@ class Homepage : AppCompatActivity() {
         fireButton.setOnClickListener(onClickListener)
 
         ReportIncidentButton.setOnClickListener {
-            startActivity(Intent(this, ReportIncident::class.java))
+            startActivity(Intent(this, ReportIncident::class.java))  //Add Report Incident
             finish()
         }
 
@@ -122,6 +124,9 @@ class Homepage : AppCompatActivity() {
                     true
                 }
                 R.id.tips -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
                     // Handle Sub Option 1 click
                     true
                 }

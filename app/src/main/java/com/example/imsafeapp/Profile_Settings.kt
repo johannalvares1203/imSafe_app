@@ -152,7 +152,7 @@ class Profile_Settings : AppCompatActivity() {
         // Check if the device supports vibration
         if (vibrator.hasVibrator()) {
             // Vibrate for two seconds (2000 milliseconds)
-            vibrator.vibrate(2000)
+            vibrator.vibrate(100)
         }
     }
 

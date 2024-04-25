@@ -7,11 +7,11 @@ import android.os.Bundle
 import android.widget.TextView
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity3 : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main3)
 
         val Registration: TextView = findViewById(R.id.register)
         val Login: TextView = findViewById(R.id.login)

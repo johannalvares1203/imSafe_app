@@ -18,7 +18,7 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
-class PhoneNumber : AppCompatActivity() {
+class MobilePhone : AppCompatActivity() {
 
     private lateinit var sendOTPBtn : Button
     private lateinit var phoneNumberET : EditText
@@ -28,7 +28,7 @@ class PhoneNumber : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_phone_number)
+        setContentView(R.layout.activity_mobile_phone)
 
         init()
         sendOTPBtn.setOnClickListener {
@@ -87,7 +87,7 @@ class PhoneNumber : AppCompatActivity() {
     }
 
     private fun sendToMain(){
-        startActivity(Intent(this@PhoneNumber , OTP_Activity::class.java))
+        startActivity(Intent(this@MobilePhone , OTP_Activity::class.java))
     }
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -125,7 +125,7 @@ class PhoneNumber : AppCompatActivity() {
             // by combining the code with a verification ID.
             // Save verification ID and resending token so we can use them later
 
-            val intent = Intent(this@PhoneNumber, OTP_Activity::class.java)
+            val intent = Intent(this@MobilePhone, OTP_Activity::class.java)
             intent.putExtra("OTP", verificationId)
             intent.putExtra("resendToken", token)
             intent.putExtra("phoneNumber", number)
@@ -136,14 +136,15 @@ class PhoneNumber : AppCompatActivity() {
 
     }
 
+// Do not uncomment this code. The login process doesn't work
 
 
-    override fun onStart() {
-        super.onStart()
-        if (auth.currentUser != null){
-            startActivity(Intent(this , Homepage::class.java))
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        if (auth.currentUser != null){
+//            startActivity(Intent(this , Homepage::class.java))
+//        }
+//    }
 
 }
 
