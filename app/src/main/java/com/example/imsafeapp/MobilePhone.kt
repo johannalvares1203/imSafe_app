@@ -54,7 +54,6 @@ class MobilePhone : AppCompatActivity() {
             // Move the intent here
             val intent = Intent(this, Profile_Settings::class.java)
             intent.putExtra("phoneNumber", number)
-            startActivity(intent)
         }
 
     }
