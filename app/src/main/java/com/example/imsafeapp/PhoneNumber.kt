@@ -33,30 +33,26 @@ class PhoneNumber : AppCompatActivity() {
         init()
         sendOTPBtn.setOnClickListener {
             number = phoneNumberET.text.trim().toString()
-            if (number.isNotEmpty()) {
-                if (number.length == 10) {
+            if (number.isNotEmpty()){
+                if (number.length == 10){
                     number = "+91$number"
                     mProgressBar.visibility = View.VISIBLE
                     val options = PhoneAuthOptions.newBuilder(auth)
-                        .setPhoneNumber(number)
-                        .setTimeout(60L, TimeUnit.SECONDS)
-                        .setActivity(this)
-                        .setCallbacks(callbacks)
+                        .setPhoneNumber(number)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(this)                 // Activity (for callback binding)
+                        .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
                         .build()
                     PhoneAuthProvider.verifyPhoneNumber(options)
-                } else {
-                    Toast.makeText(this, "Please Enter correct Number", Toast.LENGTH_SHORT).show()
+
+                }else{
+                    Toast.makeText(this , "Please Enter correct Number" , Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(this, "Please Enter Number", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this , "Please Enter Number" , Toast.LENGTH_SHORT).show()
+
             }
-
-            // Move the intent here
-            val intent = Intent(this, Profile_Settings::class.java)
-            intent.putExtra("phoneNumber", number)
-            startActivity(intent)
         }
-
     }
 
     private fun init(){
@@ -138,12 +134,12 @@ class PhoneNumber : AppCompatActivity() {
 
 
 
-    override fun onStart() {
-        super.onStart()
-        if (auth.currentUser != null){
-            startActivity(Intent(this , Homepage::class.java))
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        if (auth.currentUser != null){
+//            startActivity(Intent(this , Homepage::class.java))
+//        }
+//    }
 
 }
 

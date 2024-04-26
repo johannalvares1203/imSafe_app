@@ -80,7 +80,6 @@ class OTP_Activity : AppCompatActivity() {
             }
 
             startActivity(Intent(this, Homepage::class.java))
-            finish()
 
 
         }

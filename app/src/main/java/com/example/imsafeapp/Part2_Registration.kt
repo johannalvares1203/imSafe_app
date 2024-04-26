@@ -135,7 +135,6 @@ class Part2_Registration : AppCompatActivity() {
                     intent.putExtra("PhoneNumber", PhoneNumber.text.toString())
                     Log.d("QWE", "$email $password $firstname $lastname")
                     startActivity(intent)
-                    finish()
                 }
             }
         }

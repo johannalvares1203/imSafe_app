@@ -56,7 +56,6 @@ class Profile_Settings : AppCompatActivity() {
             vibrateForTwoSeconds()
 
             startActivity(Intent(this, LoginActivity::class.java))
-            finish()
         }
 
 
@@ -64,14 +63,12 @@ class Profile_Settings : AppCompatActivity() {
         //Lets the user change their password
         changepassword.setOnClickListener {
             startActivity(Intent(this, Forgot_Password::class.java))
-            finish()
         }
 
 
         //Lets the user go back to homepage
         goback.setOnClickListener {
             startActivity(Intent(this, Homepage::class.java))
-            finish()
         }
 
 

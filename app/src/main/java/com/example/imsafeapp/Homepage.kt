@@ -2,6 +2,7 @@ package com.example.imsafeapp
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -63,7 +64,6 @@ class Homepage : AppCompatActivity() {
 
         redirect.setOnClickListener {
             startActivity(Intent(this, Profile_Settings::class.java))
-            finish()
         }
 
 
@@ -82,7 +82,6 @@ class Homepage : AppCompatActivity() {
                         } else {
                             startActivity(Intent(this@Homepage, CounsellorsActivity::class.java))
                         }
-                        finish()
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
@@ -102,7 +101,7 @@ class Homepage : AppCompatActivity() {
 
         ReportIncidentButton.setOnClickListener {
             startActivity(Intent(this, ReportIncident::class.java))  //Add Report Incident
-            finish()
+
         }
 
 
@@ -114,20 +113,26 @@ class Homepage : AppCompatActivity() {
                 R.id.home -> {
                     //Lets the user go back to homepage
                         startActivity(Intent(this, Homepage::class.java))
-                        finish()
+
                     true
                 }
                 R.id.aboutus -> {
                     val intent = Intent(this, AboutUs::class.java)
                     startActivity(intent)
-                    finish()
+
                     true
                 }
                 R.id.tips -> {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
-                    finish()
+
                     // Handle Sub Option 1 click
+                    true
+                }
+                R.id.more -> {
+                    // Open the website in a web browser
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://blog.ipleaders.in/emergency-india/"))
+                    startActivity(intent)
                     true
                 }
                 R.id.community -> {
