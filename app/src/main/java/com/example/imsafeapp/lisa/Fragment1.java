@@ -36,7 +36,7 @@ public class Fragment1 extends Fragment {
     private ListView listView;
     private FloatingActionButton fab;
     private ArrayList<LvItem> arrayList = new ArrayList<>();
-    private ImageView image;
+    private ImageView imageView;
 
 
     public static Fragment1 newInstance() {
@@ -65,8 +65,8 @@ public class Fragment1 extends Fragment {
                 final EditText editTextText = dialog.findViewById(R.id.editTextText);
                 Button btnUpload = dialog.findViewById(R.id.btnUpload);
 
-                image = dialog.findViewById(R.id.Image);
-                image.setOnClickListener(new View.OnClickListener() {
+                imageView = dialog.findViewById(R.id.Image);
+                imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent();
@@ -83,8 +83,9 @@ public class Fragment1 extends Fragment {
                     public void onClick(View view) {
                         String name = editTextText.getText().toString();
 
-                        LvItem lvItem = new LvItem();
+                        LvItem lvItem = new LvItem("Your Name", getResources().getDrawable(R.drawable.ic_baseline_time));
                         lvItem.setName(name);
+                        lvItem.setImage(imageView.getDrawable());
                         arrayList.add(lvItem);
 
                         dialog.dismiss();
@@ -109,7 +110,7 @@ public class Fragment1 extends Fragment {
                 final Uri imageUri = data.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), imageUri);
-                    image.setImageBitmap(bitmap);
+                    imageView.setImageBitmap(bitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
