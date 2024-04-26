@@ -5,6 +5,7 @@ data class Chat(
     var receiverId: String = "",
     var message: String = "",
     var type: String = "text",
+    var time: String = "",
     val fileName: String = ""
 )
 

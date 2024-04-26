@@ -54,14 +54,6 @@ class UsersActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         getUsersList()
-
-
-        ////////////////////////////////////
-        val btnChat = findViewById<Button>(R.id.btnChat)
-        btnChat.setOnClickListener {
-            startActivity(Intent(this, CounsellorsActivity::class.java))
-        }
-        ////////////////////////////////////
     }
 
     fun getUsersList() {

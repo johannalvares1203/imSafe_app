@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary"
+    android:background="@color/colorItemRight"
     android:orientation="vertical"
     tools:context=".activity.CounsellorsActivity">
 
@@ -29,6 +29,8 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabSelectedTextColor="@color/colorItemRight"
+            app:tabIndicatorColor="@color/colorItemRight"
             android:background="#00D9D9D9">
 
             <com.google.android.material.tabs.TabItem

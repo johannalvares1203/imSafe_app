@@ -14,6 +14,9 @@ import com.example.imsafeapp.chat.model.Chat
 import com.example.imsafeapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ChatAdapter(private val context: Context, private val chatList: ArrayList<Chat>) :
     RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
@@ -42,8 +45,11 @@ class ChatAdapter(private val context: Context, private val chatList: ArrayList<
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val chat = chatList[position]
 
+        val messageTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date(chat.time.toLong()))//
+
         if (chat.type == "text") {
             holder.txtUserName.text = chat.message
+            holder.tvTimestamp.text = messageTime
         } else if (chat.type == "file") {
             val fileName = chat.fileName
             val message = SpannableString(fileName)
@@ -54,6 +60,7 @@ class ChatAdapter(private val context: Context, private val chatList: ArrayList<
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             holder.txtUserName.text = message
+            holder.tvTimestamp.text = messageTime
             holder.txtUserName.movementMethod = LinkMovementMethod.getInstance()
         }
         //Glide.with(context).load(user.profileImage).placeholder(R.drawable.profile_image).into(holder.imgUser)
@@ -61,8 +68,8 @@ class ChatAdapter(private val context: Context, private val chatList: ArrayList<
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
         val txtUserName: TextView = view.findViewById(R.id.tvMessage)
+        val tvTimestamp: TextView = view.findViewById(R.id.tvTimestamp)
     }
 
     override fun getItemViewType(position: Int): Int {

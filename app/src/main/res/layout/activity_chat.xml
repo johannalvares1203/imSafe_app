@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary">
+    android:background="@color/colorItemRight">
 
     <LinearLayout
         android:id="@+id/l1"
@@ -146,6 +146,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/button_background"
+                    android:backgroundTint="@color/colorItemRight"
                     android:src="@drawable/ic_send"
                     android:text="Sign Up" />
 

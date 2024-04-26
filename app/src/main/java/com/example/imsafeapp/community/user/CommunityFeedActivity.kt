@@ -32,11 +32,7 @@ class CommunityFeedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContentView(R.layout.activity_community_feed)
-        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }*/
+
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -49,6 +45,22 @@ class CommunityFeedActivity : AppCompatActivity() {
 
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         val userRef = userId?.let { database.getReference("Users").child(it) }
+
+        val userRequestRef = FirebaseDatabase.getInstance().getReference("Requests").child(userId!!)
+
+        userRequestRef.child("approved").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val approved = dataSnapshot.getValue(Boolean::class.java)
+                if (approved == true) {
+                    btnJoinCommunity.text = "Approved"
+                    btnJoinCommunity.isEnabled = false
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle onCancelled
+            }
+        })
 
         userRef?.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -70,7 +82,9 @@ class CommunityFeedActivity : AppCompatActivity() {
                 for (snapshot in dataSnapshot.children) {
                     val request = snapshot.getValue(Request::class.java)
                     request?.let {
-                        requestList.add(it)
+                        if (it.approved == true) {
+                            requestList.add(it)
+                        }
                     }
                 }
                 requestAdapter.notifyDataSetChanged()

@@ -275,12 +275,16 @@ class ChatActivity : AppCompatActivity() {
     ) {
         var reference: DatabaseReference? = FirebaseDatabase.getInstance().getReference()
 
+        val currentTime = System.currentTimeMillis()//
+
         var hashMap: HashMap<String, String> = HashMap()
         hashMap.put("senderId", senderId)
         hashMap.put("receiverId", receiverId)
         hashMap.put("message", message)
         hashMap.put("type", type)
         hashMap.put("fileName", fileName)
+
+        hashMap.put("time", currentTime.toString())//
 
         reference!!.child("Chat").push().setValue(hashMap)
 

@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.imsafeapp.chat.activity.CounsellorsActivity
 import com.example.imsafeapp.chat.activity.UsersActivity
 import com.example.imsafeapp.community.admin.RequestsActivity
@@ -49,6 +50,34 @@ class Homepage : AppCompatActivity() {
         val ReportIncidentButton: Button = findViewById(R.id.reportinc)
 
         val chatwithcounsellor: Button = findViewById(R.id.chat)
+
+        auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            val userRef = FirebaseDatabase.getInstance().getReference("Users").child(userId)
+            userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val role = dataSnapshot.child("role").value as? String ?: ""
+                    // Set button text based on user role
+                    if (role == "counsellor") {
+                        chatwithcounsellor.text = "Chat"
+                    } else {
+                        chatwithcounsellor.text = "Chat with Counsellor"
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle onCancelled if needed
+                }
+            })
+        } else {
+            // Handle the case where currentUser is null (user not authenticated)
+        }
+
+
+
+
         val redirect: ImageView = findViewById(R.id.profileIcon)
         val account = GoogleSignIn.getLastSignedInAccount(this)
         //Replaces image with one associated with Google Account
@@ -67,8 +96,6 @@ class Homepage : AppCompatActivity() {
         }
 
 
-        val auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
         chatwithcounsellor.setOnClickListener {
             if (currentUser != null) {
                 val userId = currentUser.uid
@@ -165,8 +192,18 @@ class Homepage : AppCompatActivity() {
                                                 }
                                             })
                                         }
-                                        "volunteer" -> startActivity(Intent(this@Homepage, RequestsActivity::class.java))
-                                        else -> Log.w("TAG", "Unknown user role: $role")
+                                        "volunteer" -> {
+                                            startActivity(
+                                                Intent(
+                                                    this@Homepage,
+                                                    RequestsActivity::class.java
+                                                )
+                                            )
+                                        }
+                                        else -> {
+                                            Log.w("TAG", "Unknown user role: $role")
+                                            Toast.makeText(this@Homepage, "$role can't access community", Toast.LENGTH_LONG).show()
+                                        }
                                     }
                                 } else {
                                     Log.e("TAG", "User data does not exist")

@@ -170,7 +170,7 @@
         android:icon="@drawable/baseline_chat_24"
         android:padding="8dp"
         app:cornerRadius="15dp"
-        android:text="Chat with Counsellor"
+        android:text="Chat"
         android:textSize="18sp"
         app:backgroundTint="#3C74F1"
         app:iconTint="@android:color/white"
