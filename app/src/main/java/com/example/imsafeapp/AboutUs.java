@@ -32,11 +32,9 @@ public class AboutUs extends AppCompatActivity {
             if (itemId == R.id.home) {
                 // Lets the user go back to homepage
                 startActivity(new Intent(AboutUs.this, Homepage.class));
-                finish();
                 return true;
             } else if (itemId == R.id.aboutus) {
                 startActivity(new Intent(AboutUs.this, AboutUs.class));
-                finish();
                 return true;
             } else if (itemId == R.id.tips) {
                 // Handle Sub Option 1 click
@@ -53,7 +51,6 @@ public class AboutUs extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AboutUs.this, Homepage.class));
-                finish();
             }
         });
 

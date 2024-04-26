@@ -18,7 +18,7 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
-class PhoneNumber : AppCompatActivity() {
+class MobilePhone : AppCompatActivity() {
 
     private lateinit var sendOTPBtn : Button
     private lateinit var phoneNumberET : EditText
@@ -28,31 +28,34 @@ class PhoneNumber : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_phone_number)
+        setContentView(R.layout.activity_mobile_phone)
 
         init()
         sendOTPBtn.setOnClickListener {
             number = phoneNumberET.text.trim().toString()
-            if (number.isNotEmpty()){
-                if (number.length == 10){
+            if (number.isNotEmpty()) {
+                if (number.length == 10) {
                     number = "+91$number"
                     mProgressBar.visibility = View.VISIBLE
                     val options = PhoneAuthOptions.newBuilder(auth)
-                        .setPhoneNumber(number)       // Phone number to verify
-                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                        .setActivity(this)                 // Activity (for callback binding)
-                        .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
+                        .setPhoneNumber(number)
+                        .setTimeout(60L, TimeUnit.SECONDS)
+                        .setActivity(this)
+                        .setCallbacks(callbacks)
                         .build()
                     PhoneAuthProvider.verifyPhoneNumber(options)
-
-                }else{
-                    Toast.makeText(this , "Please Enter correct Number" , Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Please Enter correct Number", Toast.LENGTH_SHORT).show()
                 }
-            }else{
-                Toast.makeText(this , "Please Enter Number" , Toast.LENGTH_SHORT).show()
-
+            } else {
+                Toast.makeText(this, "Please Enter Number", Toast.LENGTH_SHORT).show()
             }
+
+            // Move the intent here
+            val intent = Intent(this, Profile_Settings::class.java)
+            intent.putExtra("phoneNumber", number)
         }
+
     }
 
     private fun init(){
@@ -83,7 +86,7 @@ class PhoneNumber : AppCompatActivity() {
     }
 
     private fun sendToMain(){
-        startActivity(Intent(this@PhoneNumber , OTP_Activity::class.java))
+        startActivity(Intent(this@MobilePhone , OTP_Activity::class.java))
     }
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -121,7 +124,7 @@ class PhoneNumber : AppCompatActivity() {
             // by combining the code with a verification ID.
             // Save verification ID and resending token so we can use them later
 
-            val intent = Intent(this@PhoneNumber, OTP_Activity::class.java)
+            val intent = Intent(this@MobilePhone, OTP_Activity::class.java)
             intent.putExtra("OTP", verificationId)
             intent.putExtra("resendToken", token)
             intent.putExtra("phoneNumber", number)
@@ -132,6 +135,7 @@ class PhoneNumber : AppCompatActivity() {
 
     }
 
+// Do not uncomment this code. The login process doesn't work
 
 
 //    override fun onStart() {

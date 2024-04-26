@@ -64,13 +64,11 @@ class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
                 R.id.home -> {
                     //Lets the user go back to homepage
                     startActivity(Intent(this, Homepage::class.java))
-                    finish()
                     true
                 }
                 R.id.aboutus -> {
                     val intent = Intent(this, AboutUs::class.java)
                     startActivity(intent)
-                    finish()
                     true
                 }
                 R.id.tips -> {

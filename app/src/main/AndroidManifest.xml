@@ -22,9 +22,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -36,6 +34,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImSAFEApp"
         tools:targetApi="31">
+        <activity
+            android:name=".MobilePhone"
+            android:exported="false" />
+        <activity
+            android:name=".main_admin.MainActivity1"
+            android:exported="false" />
         <activity
             android:name=".melissa.LocationFragment"
             android:exported="false" />
@@ -50,6 +54,9 @@
             android:exported="false" />
         <activity
             android:name=".counsellor.AboutUs_Counselor"
+            android:exported="false" />
+        <activity
+            android:name=".lisa.MainActivity"
             android:exported="false" />
         <activity
             android:name=".counsellor.Counsellor_Homepage"
@@ -111,8 +118,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAlYQJnmY0bklqDfqZ5l9w069ohniV1FyA"
-            />
+            android:value="AIzaSyAlYQJnmY0bklqDfqZ5l9w069ohniV1FyA" />
 
         <activity
             android:name=".Profile_Settings"
@@ -142,7 +148,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity3"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

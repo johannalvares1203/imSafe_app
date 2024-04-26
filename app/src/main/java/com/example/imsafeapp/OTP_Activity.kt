@@ -80,7 +80,6 @@ class OTP_Activity : AppCompatActivity() {
             }
 
             startActivity(Intent(this, Homepage::class.java))
-            finish()
 
 
         }
@@ -175,7 +174,7 @@ class OTP_Activity : AppCompatActivity() {
     }
 
     private fun sendToMain() {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, MainActivity3::class.java))
     }
 
     private fun addTextChangeListener() {

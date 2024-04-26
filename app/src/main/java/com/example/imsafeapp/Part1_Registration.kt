@@ -143,13 +143,11 @@ class Part1_Registration : AppCompatActivity() {
             intent.putExtra("address", address)
 
             startActivity(intent)
-            finish()
         }
 
         loginLink.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 

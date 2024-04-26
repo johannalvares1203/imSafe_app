@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:paddingBottom="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:text="Enter Title"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:autofillHints=""
+        android:layout_marginTop="15dp"
+        android:background="@drawable/round"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+         />
+
+
+    <TextView
+        android:text="Enter Date"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:paddingTop="10dp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:autofillHints=""
+        android:layout_marginTop="15dp"
+        android:background="@drawable/round"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:text="Enter Time"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:paddingTop="10dp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:autofillHints=""
+        android:layout_marginTop="15dp"
+        android:background="@drawable/round"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:text="Enter Venue"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:paddingTop="10dp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:autofillHints=""
+        android:layout_marginTop="15dp"
+        android:background="@drawable/round"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+
+    <TextView
+        android:text="Attach Image(Optional)"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:paddingTop="10dp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:autofillHints=""
+        android:layout_marginTop="15dp"
+        android:background="@drawable/round"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="120dp"
+        android:backgroundTint="@color/blue"
+        android:text="UPLOAD"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
+
+</LinearLayout>

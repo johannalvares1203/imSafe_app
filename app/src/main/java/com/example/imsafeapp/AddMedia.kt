@@ -1,155 +1,117 @@
 package com.example.imsafeapp
 
-import android.Manifest
-import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.media.MediaRecorder
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import com.google.android.material.snackbar.Snackbar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.view.WindowCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.imsafeapp.Homepage
+import com.example.imsafeapp.R
 import com.example.imsafeapp.databinding.ActivityAddMediaBinding
-import java.io.IOException
+import com.example.imsafeapp.databinding.ActivityMain1Binding
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class AddMedia : AppCompatActivity() {
 
-    private val CAMERA_PERMISSION_CODE = 100
-    private val CAMERA_REQUEST_CODE = 101
-    private val RECORD_AUDIO_PERMISSION_CODE = 200
-    private val AUDIO_FILE_PATH =
-        Environment.getExternalStorageDirectory().absolutePath + "/audio_record.3gp"
+    private lateinit var binding: ActivityAddMediaBinding
+    private var imageUri: Uri? = null
+    private lateinit var storageReference: StorageReference
+    private lateinit var progressDialog: ProgressDialog
 
-    private var mediaRecorder: MediaRecorder? = null
-    private var isRecording = false
-    private lateinit var capturedImageView: ImageView
-
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_media)
+        binding = ActivityAddMediaBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        capturedImageView = findViewById(R.id.capturedImageView)
-        val btnCapturePhoto: Button = findViewById(R.id.btnCapturePhoto)
-        val btnRecordAudio: Button = findViewById(R.id.btnRecordAudio)
-
-        btnRecordAudio.setOnClickListener {
-            if (checkRecordAudioPermission()) {
-                toggleRecording()
-            } else {
-                requestRecordAudioPermission()
-            }
+        binding.recordPhoto.setOnClickListener {
+            selectImage()
         }
 
-        btnCapturePhoto.setOnClickListener {
-            if (checkCameraPermission()) {
-                openCamera()
+        binding.uploadImageButton.setOnClickListener {
+            uploadImage()
+        }
+
+        binding.submitButton.setOnClickListener {
+            // Call sendImageViaSMS when submit button is clicked
+            if (imageUri != null) {
+                sendImageViaSMS(imageUri.toString())
             } else {
-                requestCameraPermission()
+                Toast.makeText(this, "Please upload an image first", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun checkRecordAudioPermission(): Boolean {
-        return (ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.RECORD_AUDIO
-        ) == PackageManager.PERMISSION_GRANTED)
+    private fun uploadImage() {
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Uploading File....")
+        progressDialog.show()
+
+        val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA)
+        val now = Date()
+        val fileName = formatter.format(now)
+        storageReference = FirebaseStorage.getInstance().getReference("images/$fileName")
+
+        storageReference.putFile(imageUri!!)
+            .addOnSuccessListener(OnSuccessListener<UploadTask.TaskSnapshot> { taskSnapshot ->
+                binding.firebaseImage.setImageURI(null)
+                Toast.makeText(this@AddMedia, "Successfully Uploaded", Toast.LENGTH_SHORT)
+                    .show()
+                if (progressDialog.isShowing) progressDialog.dismiss()
+            })
+            .addOnFailureListener(OnFailureListener { e ->
+                if (progressDialog.isShowing) progressDialog.dismiss()
+                Toast.makeText(this@AddMedia, "Failed to Upload", Toast.LENGTH_SHORT).show()
+            })
     }
 
-    private fun requestRecordAudioPermission() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.RECORD_AUDIO),
-            RECORD_AUDIO_PERMISSION_CODE
-        )
-    }
+    private fun sendImageViaSMS(imageUri: String) {
+        // Replace "phoneNumber" with the recipient's phone number
+        val phoneNumber = "8767202131"
 
-    private fun toggleRecording() {
-        if (isRecording) {
-            stopRecording()
+        // Replace "Your SMS Body" with the desired message body
+        val smsBody = "Here is the image: $imageUri"
+
+        // Create an intent to send SMS
+        val smsIntent = Intent(Intent.ACTION_VIEW)
+        smsIntent.data = Uri.parse("sms:$phoneNumber")
+        smsIntent.putExtra("sms_body", smsBody)
+
+        // Check if the device supports sending SMS
+        if (smsIntent.resolveActivity(packageManager) != null) {
+            startActivity(smsIntent)
         } else {
-            startRecording()
+            Toast.makeText(this, "SMS sending not supported on this device", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun startRecording() {
-        mediaRecorder = MediaRecorder().apply {
-            setAudioSource(MediaRecorder.AudioSource.MIC)
-            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-            setOutputFile(AUDIO_FILE_PATH)
 
-            try {
-                prepare()
-                start()
-                isRecording = true
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-    }
 
-    private fun stopRecording() {
-        mediaRecorder?.apply {
-            stop()
-            release()
-            isRecording = false
-        }
-        mediaRecorder = null
-    }
-
-    private fun checkCameraPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
-    }
-
-    private fun requestCameraPermission() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.CAMERA),
-            CAMERA_PERMISSION_CODE
-        )
-    }
-
-    private fun openCamera() {
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE)
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == CAMERA_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openCamera()
-            }
-        }
+    private fun selectImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, 100)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
-            val photo: Bitmap = data?.extras?.get("data") as Bitmap
-            capturedImageView.setImageBitmap(photo)
-            capturedImageView.visibility = View.VISIBLE
+        if (requestCode == 100 && resultCode == RESULT_OK && data != null && data.data != null) {
+            imageUri = data.data
+            binding.firebaseImage.setImageURI(imageUri)
         }
     }
 }
+

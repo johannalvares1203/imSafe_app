@@ -192,7 +192,6 @@ class Part3_Registration : AppCompatActivity() {
                         if (it.isSuccessful) {
                             val intent = Intent(this@Part3_Registration, Homepage::class.java)
                             startActivity(intent)
-                            finish()
                         }
                     }
                 }

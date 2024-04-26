@@ -108,26 +108,26 @@ class LoginActivity : AppCompatActivity() {
         PhoneNoButton.setOnClickListener {
             val intent = android.content.Intent(this, PhoneNumber::class.java)
             startActivity(intent)
-            finish()
+
         }
 
         GotoRegistration.setOnClickListener {
             val intent = android.content.Intent(this, Part1_Registration::class.java)
             startActivity(intent)
-            finish()
+
         }
 
         forgotPassword.setOnClickListener {
             val intent = android.content.Intent(this, Forgot_Password::class.java)
             startActivity(intent)
-            finish()
+
         }
 
 
         Mock.setOnClickListener {
             val intent = android.content.Intent(this, Homepage::class.java)
             startActivity(intent)
-            finish()
+
         }
 
         Google.setOnClickListener {
@@ -221,7 +221,7 @@ class LoginActivity : AppCompatActivity() {
         val intent = android.content.Intent(this, Homepage::class.java)
         intent.putExtra("USER_EMAIL", email)
         startActivity(intent)
-        finish()
+
     }
 
     private fun signInGoogle() {
