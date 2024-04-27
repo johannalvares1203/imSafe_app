@@ -1,5 +1,7 @@
 package com.example.imsafeapp
 
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import android.Manifest
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
@@ -12,7 +14,6 @@ import android.graphics.Color
 import android.location.Location
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.VibrationEffect
@@ -22,7 +23,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -44,7 +44,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 
 
-class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener  {
+class PanicButton_Fire : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener  {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var googleMap: GoogleMap
@@ -52,9 +52,10 @@ class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
     private var emergencyCallMade = false
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_panic_button)
+        setContentView(R.layout.activity_panic_button_fire)
 
 
         // for bottom menu
@@ -274,7 +275,7 @@ class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
     private fun sendEmergencyAlerts() {
         // Emergency contacts
-        val emergencyContacts = arrayOf("8767202131", "9607245631") // Update with real numbers
+        val emergencyContacts = arrayOf("8767202131", "9607245631", "8605260969", "8208892153") // Update with real numbers
 
         // Get the last known location
         getCurrentLocation { location ->
@@ -283,7 +284,7 @@ class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
             sendSMS(emergencyContacts, message)
 
             // Optionally, make a phone call (ensure you handle permissions and user consent appropriately)
-            makeEmergencyCall("960724631") // Replace with an actual emergency number or remove if not needed
+            makeEmergencyCall("8766013143") // Replace with an actual emergency number or remove if not needed
         }
     }
 

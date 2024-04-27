@@ -1,7 +1,6 @@
 package com.example.imsafeapp
 
 import android.Manifest
-import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,6 +11,7 @@ import android.graphics.Color
 import android.location.Location
 import android.net.Uri
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -22,7 +22,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -43,8 +42,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 
-
-class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener  {
+class PanicButton_Amb : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener  {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var googleMap: GoogleMap
@@ -54,7 +52,7 @@ class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_panic_button)
+        setContentView(R.layout.activity_panic_button_amb)
 
 
         // for bottom menu
@@ -227,7 +225,7 @@ class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
     private fun getCurrentLocation(callback: (Location) -> Unit) {
         if (ActivityCompat.checkSelfPermission(
                 this,
-                ACCESS_FINE_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -274,7 +272,7 @@ class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
 
     private fun sendEmergencyAlerts() {
         // Emergency contacts
-        val emergencyContacts = arrayOf("8767202131", "9607245631") // Update with real numbers
+        val emergencyContacts = arrayOf("8766013143", "9607245631", "9689464763") // Update with real numbers
 
         // Get the last known location
         getCurrentLocation { location ->
@@ -283,7 +281,7 @@ class PanicButton : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
             sendSMS(emergencyContacts, message)
 
             // Optionally, make a phone call (ensure you handle permissions and user consent appropriately)
-            makeEmergencyCall("960724631") // Replace with an actual emergency number or remove if not needed
+            makeEmergencyCall("8766013143") // Replace with an actual emergency number or remove if not needed
         }
     }
 

@@ -35,6 +35,18 @@
         android:theme="@style/Theme.ImSAFEApp"
         tools:targetApi="31">
         <activity
+            android:name=".EditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".Record_Audio"
+            android:exported="false" />
+        <activity
+            android:name=".PanicButton_Fire"
+            android:exported="false" />
+        <activity
+            android:name=".PanicButton_Amb"
+            android:exported="false" />
+        <activity
             android:name=".MobilePhone"
             android:exported="false" />
         <activity

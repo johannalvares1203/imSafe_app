@@ -4,11 +4,13 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -27,6 +29,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.OAuthProvider
 
 class LoginActivity : AppCompatActivity() {
 
@@ -43,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        val Mock: android.widget.ImageView = findViewById(R.id.mock)
+        val Apple: android.widget.ImageView = findViewById(R.id.mock)
         val PhoneNoButton: android.widget.ImageView = findViewById(R.id.phone_no)
         val Google: android.widget.ImageView = findViewById(R.id.google_btn)
         val loginButton: android.widget.Button = findViewById(R.id.user_login)
@@ -124,11 +127,39 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        Mock.setOnClickListener {
-            val intent = android.content.Intent(this, Homepage::class.java)
-            startActivity(intent)
+        Apple.setOnClickListener {
+            // Initialize Firebase Authentication
+            val auth = FirebaseAuth.getInstance()
 
+            // Initialize Apple Sign-In provider
+            val provider = OAuthProvider.newBuilder("apple.com")
+
+            // Add required scopes
+            provider.setScopes(arrayListOf("email", "name"))
+
+            // Add custom parameters (optional)
+            provider.addCustomParameter("locale", "fr")
+
+            // Start sign-in flow with Apple provider
+            auth.startActivityForSignInWithProvider(this@LoginActivity, provider.build())
+                .addOnSuccessListener { authResult ->
+                    // Sign-in successful!
+                    Log.d(TAG, "activitySignIn:onSuccess:${authResult.user}")
+                    val user = authResult.user
+                    // Navigate to homepage
+                    val intent = Intent(this@LoginActivity, Homepage::class.java)
+                    startActivity(intent)
+                    finish() // Optional: Finish the current activity to prevent going back to the login screen
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "activitySignIn:onFailure", e)
+                    // Handle sign-in failure
+                    // You may want to show an error message to the user
+                }
         }
+
+
+
 
         Google.setOnClickListener {
             signInGoogle()

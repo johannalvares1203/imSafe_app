@@ -15,6 +15,7 @@ import com.example.imsafeapp.Homepage
 import com.example.imsafeapp.R
 import com.example.imsafeapp.databinding.ActivityAddMediaBinding
 import com.example.imsafeapp.databinding.ActivityMain1Binding
+import com.example.imsafeapp.melissa.ReportIncident
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.storage.FirebaseStorage
@@ -38,6 +39,10 @@ class AddMedia : AppCompatActivity() {
 
         binding.recordPhoto.setOnClickListener {
             selectImage()
+        }
+
+        binding.recordAudioButton.setOnClickListener {
+            startActivity(Intent(this, Record_Audio::class.java))  //Add Report Incident
         }
 
         binding.uploadImageButton.setOnClickListener {

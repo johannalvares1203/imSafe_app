@@ -7,11 +7,57 @@
     android:orientation="vertical"
     tools:context=".melissa.ReportIncident">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:background="#004AAD"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-48dp"
+        tools:layout_editor_absoluteY="-11dp">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="imSAFE"
+            android:textColor="@android:color/white"
+            android:textSize="38sp"
+            android:textStyle="bold"/>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="50dp"
+            android:onClick="showPopupMenu">
+
+            <ImageView
+                android:id="@+id/profileIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:onClick="showPopupMenu"
+                android:background="@drawable/circular_background" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
     <!-- state the incident -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
         android:gravity="left"
         android:text="State the Incident"
@@ -99,7 +145,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:background="@drawable/baseline_image_24"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="90dp"
             android:layout_marginTop="50dp"/>
 
         <ImageButton
@@ -107,16 +153,9 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@drawable/baseline_videocam_24"
-            android:layout_marginLeft="130dp"
+            android:layout_marginLeft="220dp"
             android:layout_marginTop="45dp"/>
 
-        <ImageButton
-            android:id="@+id/mic"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@drawable/baseline_mic_24"
-            android:layout_marginLeft="240dp"
-            android:layout_marginTop="50dp"/>
 
     </RelativeLayout>
 
@@ -163,5 +202,31 @@
         android:textColor="@color/white"
         android:textSize="20dp"
         android:background="@drawable/button_round" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="90dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            app:menu="@menu/bottom_navigation_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:labelVisibilityMode="labeled"
+            android:background="#8DB0FF"/>
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,8 +12,10 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,12 +24,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.imsafeapp.AboutUs;
+import com.example.imsafeapp.Homepage;
+import com.example.imsafeapp.Profile_Settings;
 import com.example.imsafeapp.R;
+import com.example.imsafeapp.community.user.CommunityActivity;
+import com.example.imsafeapp.lisa.MainActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.squareup.picasso.Picasso;
 
 public class ReportIncident extends AppCompatActivity {
 
@@ -34,7 +46,7 @@ public class ReportIncident extends AppCompatActivity {
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int FINE_PERMISSION_CODE = 1;
     private Location currentLocation;
-    ImageView image, video, mic, edit;
+    ImageView image, video, edit;
     Bitmap bitmap;
     Uri videoUri;
     int REQUEST_CODE_FOR_IMAGE = 1000;
@@ -63,9 +75,65 @@ public class ReportIncident extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_incident);
 
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageView redirect = findViewById(R.id.profileIcon);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        // Replaces image with one associated with Google Account
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageView profileImageView = findViewById(R.id.profileIcon);
+
+        if (account != null) {
+            // Load the profile photo using Picasso library (or any other image loading library)
+            Picasso.get().load(account.getPhotoUrl()).into(profileImageView);
+        } else {
+            // If the user is not signed in with Google, you can set a default image or hide the ImageView
+            profileImageView.setImageResource(R.drawable.baseline_add_photo_alternate_24);
+        }
+
+        redirect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportIncident.this, Profile_Settings.class));
+            }
+        });
+
+        //bottom navigation
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int itemId = menuItem.getItemId();
+
+                // Use if-else statements instead of switch-case
+                if (itemId == R.id.home) {
+                    startActivity(new Intent(ReportIncident.this, Homepage.class));
+                    return true;
+                } else if (itemId == R.id.aboutus) {
+                    Intent aboutIntent = new Intent(ReportIncident.this, AboutUs.class);
+                    startActivity(aboutIntent);
+                    return true;
+                } else if (itemId == R.id.tips) {
+                    Intent tipsIntent = new Intent(ReportIncident.this, MainActivity.class);
+                    startActivity(tipsIntent);
+                    // Handle Sub Option 1 click
+                    return true;
+                } else if (itemId == R.id.more) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://blog.ipleaders.in/emergency-india/"));
+                    startActivity(browserIntent);
+                    return true;
+                } else if (itemId == R.id.community) {
+                    Intent commIntent = new Intent(ReportIncident.this, CommunityActivity.class);
+                    startActivity(commIntent);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+
         image = (ImageView) findViewById(R.id.image);
         video = (ImageView) findViewById(R.id.video);
-        mic = (ImageView) findViewById(R.id.mic);
         edit = (ImageView) findViewById(R.id.edit);
         submit = (Button) findViewById(R.id.submit);
 
@@ -218,7 +286,7 @@ public class ReportIncident extends AppCompatActivity {
             double lat = currentLocation.getLatitude();
             double lon = currentLocation.getLongitude();
             String message="http://maps.google.com/maps?saddr="+lat+","+lon;
-            String number = "1234567890";
+            String number = "7745093563";
 
             StringBuffer smsBody = new StringBuffer();
             smsBody.append(Uri.parse(message));
@@ -253,7 +321,7 @@ public class ReportIncident extends AppCompatActivity {
 
     private void makeCall()
     {
-        String PHONE_NUMBER = "1234567890";
+        String PHONE_NUMBER = "7745093563";
 
         Intent phoneintent = new Intent(Intent.ACTION_CALL);
         phoneintent.setData(Uri.parse("tel:" + PHONE_NUMBER));

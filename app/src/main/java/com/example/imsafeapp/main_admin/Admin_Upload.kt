@@ -130,7 +130,6 @@ class Admin_Upload : AppCompatActivity() {
                 Toast.makeText(this,"Saved",Toast.LENGTH_SHORT).show()
                 val intent = Intent(this@Admin_Upload, Admin_Add::class.java)
                 startActivity(intent)
-                finish()
             }.addOnFailureListener{
                 Toast.makeText(this,"Failed to add users!",Toast.LENGTH_SHORT).show()
             }

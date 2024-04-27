@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".main_admin.Admin_Add">
 
     <ImageView
         android:id="@+id/backgroundImageone"
@@ -90,6 +91,21 @@
         android:textSize="18sp"
         android:layout_marginTop="20dp"
         android:backgroundTint="#004AAD"/>
+
+    <TextView
+        android:id="@+id/alerts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/viewdata"
+        android:layout_above="@id/loginLink"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:text="Add Alerts"
+        android:textSize="20dp"
+        android:textColor="#004AAD"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp" />
 
     <TextView
         android:id="@+id/loginLink"

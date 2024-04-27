@@ -117,9 +117,8 @@ class Part3_Registration : AppCompatActivity() {
             registerUser(cUserName, email!!, password!!)
 
 
-            /*val intent = Intent(this, Homepage::class.java)
+            val intent = Intent(this, Homepage::class.java)
             startActivity(intent)
-            finish()*/
         }
 
 

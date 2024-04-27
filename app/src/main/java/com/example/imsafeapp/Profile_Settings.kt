@@ -10,6 +10,8 @@ import android.os.Bundle
 import android.os.Vibrator
 import android.text.Html
 import android.util.Log
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -36,6 +38,8 @@ class Profile_Settings : AppCompatActivity() {
         val contact_us: TextView = findViewById(R.id.connect)
         val termsandconditions: TextView = findViewById(R.id.termsAndConditionsLink)
         val changepassword: TextView = findViewById(R.id.changepassword)
+        val edit_profile: Button = findViewById(R.id.editprof)
+
 
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         auth = FirebaseAuth.getInstance()
@@ -49,6 +53,14 @@ class Profile_Settings : AppCompatActivity() {
         // Set the phone number as the text for phoneTextView
         phone.text = phoneNumber
 
+        edit_profile.setOnClickListener {
+            startActivity(Intent(this, EditProfile::class.java))
+        }
+
+        val Share: ImageButton = findViewById(R.id.share)
+        Share.setOnClickListener {
+            shareApkLink()
+        }
 
         //Lets the user log out of his profile.
         logout.setOnClickListener {
@@ -190,6 +202,17 @@ class Profile_Settings : AppCompatActivity() {
         emailTextView.text = ""
         profileImageView.setImageDrawable(null)
         phone.text = ""
+    }
+
+
+    private fun shareApkLink() {
+        val apkUrl = "https://mega.nz/file/TyA1TYjL#96uEVH-RM2_PdZpewfv6PPeftb9ve2umH4clkSo-bSI"
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "Download the imSAFE app from: $apkUrl")
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(sendIntent, null))
     }
 
 

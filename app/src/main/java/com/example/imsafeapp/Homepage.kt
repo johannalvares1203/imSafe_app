@@ -123,8 +123,14 @@ class Homepage : AppCompatActivity() {
         }
 
         policeButton.setOnClickListener(onClickListener)
-        ambulanceButton.setOnClickListener(onClickListener)
-        fireButton.setOnClickListener(onClickListener)
+
+        fireButton.setOnClickListener {
+            startActivity(Intent(this, PanicButton_Fire::class.java))  //Add Report Incident
+        }
+
+        ambulanceButton.setOnClickListener {
+            startActivity(Intent(this, PanicButton_Amb::class.java))  //Add Report Incident
+        }
 
         ReportIncidentButton.setOnClickListener {
             startActivity(Intent(this, ReportIncident::class.java))  //Add Report Incident
@@ -158,7 +164,7 @@ class Homepage : AppCompatActivity() {
                 }
                 R.id.more -> {
                     // Open the website in a web browser
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://blog.ipleaders.in/emergency-india/"))
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.indiacode.nic.in/handle/123456789/15240?view_type=browse&sam_handle=123456789/2495"))
                     startActivity(intent)
                     true
                 }

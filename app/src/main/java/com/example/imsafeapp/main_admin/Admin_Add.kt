@@ -8,6 +8,7 @@ import com.example.imsafeapp.LoginActivity
 import com.example.imsafeapp.R
 import com.example.imsafeapp.databinding.ActivityAdminAddBinding
 import com.example.imsafeapp.databinding.ActivityMainBinding
+import com.example.imsafeapp.lisa.MainActivity
 
 class Admin_Add : AppCompatActivity() {
 
@@ -19,7 +20,6 @@ class Admin_Add : AppCompatActivity() {
         binding.mainUpload.setOnClickListener(View.OnClickListener{
             val intent = Intent(this@Admin_Add, Admin_Upload::class.java)
             startActivity(intent)
-            finish()
         })
         binding.mainUpdate.setOnClickListener(View.OnClickListener{
             val intent = Intent(this@Admin_Add, Admin_Update::class.java)
@@ -37,6 +37,11 @@ class Admin_Add : AppCompatActivity() {
 
         binding.viewdata.setOnClickListener(View.OnClickListener{
             val intent = Intent(this@Admin_Add, ViewDetails::class.java)
+            startActivity(intent)
+        })
+
+        binding.alerts.setOnClickListener(View.OnClickListener{
+            val intent = Intent(this@Admin_Add, MainActivity::class.java)
             startActivity(intent)
         })
     }
